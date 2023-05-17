@@ -58,6 +58,15 @@ def logout():
         response = make_response('', 204)
         return response
 
+#*CheckSession Cookies
+@app.route('/checksession', methods=['GET'])
+def check_session():
+    if request.method == 'GET':
+        user_id = session['user_id']
+        if user_id:
+            user = User.query.filter(User.id == user_id).first()
+            return user.to_dict(), 200
+        return {},401
             
 
 if __name__ == '__main__':

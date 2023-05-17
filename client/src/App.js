@@ -1,39 +1,29 @@
 import './App.css';
-import { Routes, Route } from "react-router-dom"
-import { useState } from 'react';
-import Navbar from './Components/Navbar';
-import UserHome from './Components/User/UserHome';
-import EmployeeHome from './Components/Employee/EmployeeHome';
+import { useEffect, useState } from 'react';
 import LoginPage from './Components/LoginPage';
+import UserApp from './Components/User/UserApp';
+import EmployeeApp from './Components/Employee/EmployeeApp';
 
 function App() {
   const [user, setUser] = useState(null)
-
   const updateUser = (user) => setUser(user)
 
+  useEffect(() => {
+    fetch("/checksession")
+    .then((r)=>{
+      if (r.ok) {
+        r.json().then((user) => setUser(user));
+      }
+    });
+  },[])
 
 
 
-  if (!user) return (
-    <div className="App">
-      <Navbar />
-      <LoginPage updateUser={updateUser} /> 
-    </div>
-  )
-
-  return (
-    <div className="App">
-      <Navbar />
-      <UserHome />
-      <EmployeeHome />   
-      {/* <Routes>
-        <Route element={<UserHome />}/>
-        <Route element={<EmployeeHome />}/>
-      </Routes> */}
-      
-
-    </div>
-  );
+  //create a statement for USER. If User has Admin quality, then direct user toward employee page, otherwise, go to user page
+  if (user) {
+    if (user.admin ==="0")return<UserApp user={user} updateUser={updateUser} /> 
+    else if (user.admin === "1")return <EmployeeApp user={user} updateUser={updateUser} />
+  } 
+  return <LoginPage updateUser={updateUser} />
 }
-
 export default App;

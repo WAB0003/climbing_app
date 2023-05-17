@@ -2,6 +2,8 @@ import React, {useState} from 'react'
 // import {useHistory} from 'react-router-dom'
 import 'semantic-ui-css/semantic.min.css'
 import { Container, Button, Header, Image, Modal, Form } from 'semantic-ui-react'
+import { Navigate } from 'react-router-dom'
+
 
 const LoginPage = ({updateUser} ) => {
     //!State Variables
@@ -23,7 +25,7 @@ const LoginPage = ({updateUser} ) => {
         setFormData({...formData, 
             [e.target.name]:e.target.value,
         })
-        console.log(formData)
+        // console.log(formData)
     }
 
     const handleSubmit = () => {
@@ -47,6 +49,7 @@ const LoginPage = ({updateUser} ) => {
         .then(r=>r.json())
         .then((user)=>{
             updateUser(user)
+            
         })
 
     }
