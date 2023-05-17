@@ -4,23 +4,24 @@ from random import choice as rc
 
 from faker import Faker
 
-from server.app import app
-from models import db, Movie
+from app import app
+from models import db, User
 
 fake = Faker()
 
-def make_movies():
+def make_users():
 
-    Movie.query.delete()
+    User.query.delete()
     
-    movies = []
-    for i in range(50):
-        m = Movie(title=fake.sentence(nb_words=4).title())
-        movies.append(m)
+    climberBill = User(first_name="Bill", last_name="Brown", username="climberBill", password_hash="chicken")
+    employeeJim = User(first_name="Jim", last_name="Bob", username="employeeJim", admin=True, password_hash="chicken")
+    
 
-    db.session.add_all(movies)
+
+    db.session.add_all([climberBill,employeeJim])
     db.session.commit()
+    # import ipdb; ipdb.set_trace()
 
 if __name__ == '__main__':
     with app.app_context():
-        make_movies()
+        make_users()
