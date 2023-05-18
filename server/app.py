@@ -70,8 +70,7 @@ def check_session():
 
 
 
-
-#!GYM ROUTES
+#!GYM
 #*ALL GYMS
 @app.route('/gyms', methods=[ "GET" , "POST" ])
 def gyms():
@@ -105,8 +104,7 @@ def gym_by_id(id):
             db.session.delete(gym)
             db.session.commit()
             return {"message":"Gym Deleted"}, 204
-        return {"error": "404: Team not found"}, 404
-    #!PATCH MAY BE MESSED UP
+        return {"error": "404: Gym not found"}, 404
     elif request.method == "PATCH":
         formData = request.get_json()
         if formData is None:
@@ -121,9 +119,62 @@ def gym_by_id(id):
             response = make_response(gym.to_dict(), 200)
             return response 
         else:
-            return {"error": "404: Team not found"}, 404
-    
+            return {"error": "404: Gym not found"}, 404
         
+#!Routes
+#*ALL Routes
+@app.route('/routes', methods=[ "GET" , "POST" ])
+def routes():
+    if request.method == "GET":
+        return [route.to_dict() for route in Route.query.all()]
+    elif request.method == "POST":
+        formData = request.get_json()
+        try:
+            new_route = Route(
+                name=formData.get("name"),
+                rating=formData.get("rating"),
+                video_url=formData.get("video_url"),
+                setter_id=formData.get("setter_id"),
+                gym_id=formData.get("gym_id"),
+            )
+            db.session.add(new_route)
+            db.session.commit()
+            return new_route.to_dict(), 201
+        except ValueError:
+            return {"error": "400: Validation errors"}, 400 
+
+#*Route BY ID
+@app.route("/routes/<int:id>", methods=["GET", "DELETE", "PATCH"])
+def route_by_id(id):
+    route = Route.query.filter(Route.id == id).one_or_none()
+    if request.method == "GET":
+        if route:
+            return route.to_dict()
+        else:
+            return {"error": "404: Route not found"}, 404
+    elif request.method == "DELETE":
+        if route:
+            db.session.delete(route)
+            db.session.commit()
+            return {"message":"Route Deleted"}, 204
+        return {"error": "404: Route not found"}, 404
+    elif request.method == "PATCH":
+        formData = request.get_json()
+        if formData is None:
+            return {"error": "400: Request body missing"}, 400
+        if route:
+            for attr in formData:
+                setattr(route, attr, formData[attr])
+            
+            db.session.add(route)
+            db.session.commit()
+            
+            response = make_response(route.to_dict(), 200)
+            return response 
+        else:
+            return {"error": "404: Route not found"}, 404
+    
+    
 
 if __name__ == '__main__':
     app.run(port=5555)

@@ -35,7 +35,7 @@ def make_routes():
     
     route_list = []
     for each_route in range(8):
-        route = Route(name=fake.company(), rating=randint(0,6), video_url="video url", setter_id=2, gym_id=choice([1,2]), active=choice([True, False]))
+        route = Route(name=fake.company(), rating=randint(0,6), video_url="video url", setter_id=3, gym_id=choice([1,2]), active=choice([True, False]))
         route_list.append(route)
     
     db.session.add_all(route_list)

@@ -7,6 +7,29 @@ from config import db, bcrypt
 #!USER MODEL
 class User(db.Model, SerializerMixin):
     __tablename__ = 'users'
+    
+    serialize_rules = ("-created_at", 
+                       "-updated_at",
+                       
+                       "-current_gym_id",
+                       "-current_gym.address",
+                       "-current_gym.phone",
+                       "-current_gym.users",
+                       "-current_gym.routes,",
+                       
+                       "-routes.rating",
+                       "-routes.video_url",
+                       "-routes.setter_id",
+                       "-routes.gym_id",
+                       "-routes.gym",
+                       "-routes.setter",
+                       "-routes.likes",
+                       
+                       "-likes.user_id",
+                       "-likes.route_id",
+                       "-likes.route",
+                       "-likes.user"              
+                    )
 
     id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.String)
@@ -49,6 +72,28 @@ class User(db.Model, SerializerMixin):
 #!Route Model
 class Route(db.Model, SerializerMixin):
     __tablename__ = 'routes'
+    
+    serialize_rules = ("-created_at", 
+                       "-updated_at",
+                       
+                       "-gym_id",
+                       "-gym.address",
+                       "-gym.phone",
+                       "-gym.users",
+                       "-gym.routes",
+                       
+                       "-setter_id",
+                       "-setter._password_hash",
+                       "-setter.current_gym_id",
+                       "-setter.current_gym",
+                       "-setter.routes",
+                       "-setter.likes",
+                       
+                       "-likes.user_id",
+                       "-likes.route_id",
+                       "-likes.user",
+                       "-likes.route"
+                    )
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
@@ -74,6 +119,12 @@ class Route(db.Model, SerializerMixin):
 #!GYM Model
 class Gym(db.Model, SerializerMixin):
     __tablename__ = 'gyms'
+    
+    serialize_rules = ("-created_at", 
+                       "-updated_at",
+                       
+                       "-users",
+                       "-routes")
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
