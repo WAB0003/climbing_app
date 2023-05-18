@@ -36,7 +36,7 @@ class User(db.Model, SerializerMixin):
     last_name = db.Column(db.String)
     username = db.Column(db.String)
     _password_hash = db.Column(db.String)
-    admin = db.Column(db.String, default=False)
+    admin = db.Column(db.Boolean, default=False, nullable=False)
     current_gym_id = db.Column(db.Integer, db.ForeignKey("gyms.id"))
     created_at = db.Column(db.DateTime, server_default=db.func.now())
     updated_at = db.Column(db.DateTime, onupdate=db.func.now())
@@ -89,7 +89,8 @@ class Route(db.Model, SerializerMixin):
                        "-setter.routes",
                        "-setter.likes",
                        
-                       "-likes.user_id",
+                       "-likes.created_at",
+                       "-likes.updated_at",
                        "-likes.route_id",
                        "-likes.user",
                        "-likes.route"

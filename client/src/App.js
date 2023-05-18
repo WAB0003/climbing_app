@@ -21,8 +21,8 @@ function App() {
 
   //create a statement for USER. If User has Admin quality, then direct user toward employee page, otherwise, go to user page
   if (user) {
-    if (user.admin ==="0")return<UserApp user={user} updateUser={updateUser} /> 
-    else if (user.admin === "1")return <EmployeeApp user={user} updateUser={updateUser} />
+    if (user.admin ===false)return<UserApp user={user} updateUser={updateUser} /> 
+    else if (user.admin === true)return <EmployeeApp user={user} updateUser={updateUser} />
   } 
   return <LoginPage updateUser={updateUser} />
 }
