@@ -2,11 +2,19 @@ import React from 'react'
 import 'semantic-ui-css/semantic.min.css'
 import { Button, Form } from 'semantic-ui-react'
 import { useState } from 'react'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
+import { currentUser } from '../../Recoil/userRecoil'
+import { currentGyms } from '../../Recoil/gymsRecoil'
+import { currentRoutes } from '../../Recoil/routesRecoil'
 
 //!Notes
 //! Pass down All Gyms as State
 
-const AddRouteForm = ({handleAddRoute, user, allGyms }) =>{
+const AddRouteForm = ({handleAddRoute, setOpen }) =>{
+    //Pull in required state from Recoil
+    const user = useRecoilValue(currentUser)
+    const allGyms = useRecoilValue(currentGyms)
+    const setAllRoutes = useSetRecoilState(currentRoutes)
 
     // Create state to handle form:
     const [formData, setFormData] = useState({
@@ -29,6 +37,7 @@ const AddRouteForm = ({handleAddRoute, user, allGyms }) =>{
     //! Handle Submit
     const handleSubmit = () => {
         //Create new team object that pull information from formData
+        
         const newRouteObj = {
             name: name,
             rating: rating, 
@@ -49,23 +58,14 @@ const AddRouteForm = ({handleAddRoute, user, allGyms }) =>{
           })
           .then((r)=>r.json())
           .then((newRoute)=>{
-            handleAddRoute(newRoute)
+            setAllRoutes((prevRouteList)=>[...prevRouteList,newRoute])
           } )
-
-        // Reset Form
-        // setFormData({
-        //     name: "",
-        //     rating:"",
-        //     video_url:"",
-        //     setter_id:"",
-        //     gym_id:""
-        // })
+          setOpen(false)
     }
 
     const displayGyms = allGyms.map((gym)=>{
         return <option key={gym.id} value={gym.id} name="gym_id" >{gym.name}</option>
         })
-
 
     return(
         <Form>

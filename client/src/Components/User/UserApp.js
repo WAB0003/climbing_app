@@ -3,14 +3,14 @@ import NavUser from "./NavUser";
 import UserHome from "./UserHome";
 
 
-const UserApp = ({user, updateUser}) => {
+const UserApp = () => {
 
 
 
 
     return(
         <div>
-          <NavUser user={user} updateUser={updateUser} />
+          <NavUser />
           <Routes>
             <Route path="/" element={<UserHome/>}/>
           </Routes>

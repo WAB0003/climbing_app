@@ -4,16 +4,13 @@ import EmployeeHome from "./EmployeeHome";
 
 
 
-const EmployeeApp = ({user, updateUser}) => {
-
-
-
+const EmployeeApp = () => {
 
     return(
         <div>
-          <NavEmployee user={user} updateUser={updateUser} />
+          <NavEmployee />
           <Routes>
-            <Route path="/" element={<EmployeeHome user={user} />}/>
+            <Route path="/" element={<EmployeeHome />}/>
           </Routes>
         </div>
       )

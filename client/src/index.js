@@ -4,11 +4,16 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { RecoilRoot, atom, selector, useRecoilState, useRecoilValue } from 'recoil'
+
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Router>
-    <App />
+    <RecoilRoot>
+      <App />
+    </RecoilRoot>
   </Router>
 );
 

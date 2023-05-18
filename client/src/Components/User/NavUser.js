@@ -1,7 +1,13 @@
+import { useRecoilValue } from "recoil"
 import "../../App.css"
+import { currentUser } from "../../Recoil/userRecoil"
+import { useSetRecoilState } from "recoil"
 
 
-export default function NavUser({user, updateUser}) {
+export default function NavUser() {
+    const user = useRecoilValue(currentUser)
+    const updateUser = useSetRecoilState(currentUser)
+
     const handleLogout = () => {
         fetch('/logout', { method: 'DELETE'})
           .then(res => {

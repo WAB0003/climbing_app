@@ -1,15 +1,18 @@
 import React, {useState} from 'react'
 // import {useHistory} from 'react-router-dom'
 import 'semantic-ui-css/semantic.min.css'
-import { Container, Button, Header, Image, Modal, Form } from 'semantic-ui-react'
+import { Container, Button, Form } from 'semantic-ui-react'
 import { Navigate } from 'react-router-dom'
+import { currentUser } from '../Recoil/userRecoil'
+import { useSetRecoilState } from 'recoil'
 
 
-const LoginPage = ({updateUser} ) => {
+const LoginPage = () => {
     //!State Variables
     const [signUp, setSignUp] = useState(false)
+    const updateUser = useSetRecoilState(currentUser)
     // const history = useHistory()
-    const [errors, setErrors] = useState(null)
+    // const [errors, setErrors] = useState(null)
     const [formData, setFormData] = useState({
         first_name: "",
         last_name: "", 
@@ -48,6 +51,7 @@ const LoginPage = ({updateUser} ) => {
         })
         .then(r=>r.json())
         .then((user)=>{
+            console.log(user)
             updateUser(user)
         })
 

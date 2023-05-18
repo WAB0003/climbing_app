@@ -3,11 +3,18 @@ import 'semantic-ui-css/semantic.min.css'
 import { Table, Container, Icon } from 'semantic-ui-react'
 import "../../App.css"
 import AddRouteModal from './AddRouteModal';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { currentUser } from '../../Recoil/userRecoil';
+import { currentGyms } from '../../Recoil/gymsRecoil';
+import { currentRoutes } from '../../Recoil/routesRecoil';
 
 
-const EmployeeHome = ({user}) => {
-    const [allRoutes, setAllRoutes] = useState([])
-    const [allGyms, setAllGyms] = useState([])
+
+const EmployeeHome = () => {
+    const [allRoutes, setAllRoutes] = useRecoilState(currentRoutes)
+    const [allGyms, setAllGyms] = useRecoilState(currentGyms)
+    const user = useRecoilValue(currentUser)
+    
     
     //Get all routes upon initial render:
     useEffect(()=>{
@@ -21,13 +28,6 @@ const EmployeeHome = ({user}) => {
         .then(r=>r.json())
         .then(gyms=>setAllGyms(gyms))
     },[])
-
-
-    const handleAddRoute = (newRoute) => {
-        setAllRoutes((prevRouteList)=>[...prevRouteList,newRoute])
-
-    }
-
 
     const handleEditClick=(route)=>{
         console.log("clicked")
@@ -78,7 +78,7 @@ const EmployeeHome = ({user}) => {
         <div>
             <h1>Employee Home</h1>
             <Container >
-                {<AddRouteModal user={user} handleAddRoute={handleAddRoute} allGyms={allGyms} />}
+                {<AddRouteModal />}
                 <Table celled>
                     <Table.Header>
                         <Table.Row>
