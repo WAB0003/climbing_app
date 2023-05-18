@@ -20,6 +20,13 @@ export default function NavUser({user, updateUser}) {
                         <div>Hello, {user.first_name} </div>
                         <a onClick={handleLogout}>Logout</a>
                     </li>
+                    <li>Current Routes</li>
+                    <li>Favorite Routes</li>
+                    <li>Climbed Routes</li>
+                    <li>
+                        <div>Gym Name</div>
+                        <a onClick={handleLogout}>Select Gym</a>
+                    </li>
                 </ul>
             </div>
          </nav>

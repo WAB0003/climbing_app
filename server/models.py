@@ -1,8 +1,10 @@
 from sqlalchemy_serializer import SerializerMixin
 from sqlalchemy.ext.hybrid import hybrid_property
+from sqlalchemy.orm import validates
 
 from config import db, bcrypt
 
+#!USER MODEL
 class User(db.Model, SerializerMixin):
     __tablename__ = 'users'
 
@@ -12,8 +14,13 @@ class User(db.Model, SerializerMixin):
     username = db.Column(db.String)
     _password_hash = db.Column(db.String)
     admin = db.Column(db.String, default=False)
+    current_gym_id = db.Column(db.Integer, db.ForeignKey("gyms.id"))
     created_at = db.Column(db.DateTime, server_default=db.func.now())
     updated_at = db.Column(db.DateTime, onupdate=db.func.now())
+    
+    current_gym = db.relationship("Gym", back_populates="users")
+    routes = db.relationship("Route", back_populates="setter")
+    likes = db.relationship("Like", back_populates="user")
     
     @hybrid_property
     def password_hash(self):
@@ -25,9 +32,77 @@ class User(db.Model, SerializerMixin):
         print(password_hash)
         self._password_hash = password_hash.decode('utf-8')
     
-    #!Create a method that uses bycrypt built in check_password_hash    
+    #*Create a method that uses bycrypt built in check_password_hash    
     def authenticate(self, password):
         return bcrypt.check_password_hash(self._password_hash, password.encode('utf-8'))
+    
+    @validates('username')
+    def validate_username(self,key,username_value):
+        all_usernames = User.query.all()
+        if username_value in all_usernames:
+            raise ValueError("Username must be unique")
+        return username_value
 
     def __repr__(self):
         return f'<User {self.username}>'
+
+#!Route Model
+class Route(db.Model, SerializerMixin):
+    __tablename__ = 'routes'
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String)
+    rating = db.Column(db.Integer)
+    video_url = db.Column(db.String)
+    setter_id = db.Column(db.Integer, db.ForeignKey("users.id"))
+    gym_id = db.Column(db.Integer, db.ForeignKey("gyms.id"))
+    active = db.Column(db.Boolean, default=False, nullable=False)
+
+    created_at = db.Column(db.DateTime, server_default=db.func.now())
+    updated_at = db.Column(db.DateTime, onupdate=db.func.now())
+    
+    #*Needs relationship with likes, gym, and setter
+
+    gym = db.relationship("Gym", back_populates="routes")
+    setter = db.relationship("User", back_populates="routes")
+    likes = db.relationship("Like", back_populates="route")
+    
+    def __repr__(self):
+            return f'<Route {self.name}>'
+
+
+#!GYM Model
+class Gym(db.Model, SerializerMixin):
+    __tablename__ = 'gyms'
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String)
+    address = db.Column(db.String)
+    phone = db.Column(db.Integer)
+    
+    created_at = db.Column(db.DateTime, server_default=db.func.now())
+    updated_at = db.Column(db.DateTime, onupdate=db.func.now())
+    
+    users = db.relationship("User", back_populates="current_gym")
+    routes = db.relationship("Route", back_populates="gym")
+    
+    def __repr__(self):
+        return f'<Gym {self.name}>'
+    
+    
+#!Like Join Table
+class Like(db.Model, SerializerMixin):
+    __tablename__ = 'likes'
+
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
+    route_id = db.Column(db.Integer, db.ForeignKey("routes.id"))
+    
+    route = db.relationship("Route", back_populates="likes")
+    user = db.relationship("User", back_populates="likes")
+    
+    created_at = db.Column(db.DateTime, server_default=db.func.now())
+    updated_at = db.Column(db.DateTime, onupdate=db.func.now())
+    
+    def __repr__(self):
+        return f'<Like {self.id}>'

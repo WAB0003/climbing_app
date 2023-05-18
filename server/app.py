@@ -4,7 +4,7 @@ from werkzeug.exceptions import NotFound, Unauthorized
 
 from config import app, db, api
 
-from models import db, User
+from models import db, User, Gym, Like, Route
 
 CORS(app)
 
@@ -67,7 +67,63 @@ def check_session():
             user = User.query.filter(User.id == user_id).first()
             return user.to_dict(), 200
         return {},401
+
+
+
+
+#!GYM ROUTES
+#*ALL GYMS
+@app.route('/gyms', methods=[ "GET" , "POST" ])
+def gyms():
+    if request.method == "GET":
+        return [gym.to_dict() for gym in Gym.query.all()]
+    elif request.method == "POST":
+        formData = request.get_json()
+        try:
+            new_gym = Gym(
+                name=formData.get("name"),
+                address=formData.get("address"),
+                phone=formData.get("phone")
+            )
+            db.session.add(new_gym)
+            db.session.commit()
+            return new_gym.to_dict(), 201
+        except ValueError:
+            return {"error": "400: Validation errors"}, 400 
+
+#*GYM BY ID
+@app.route("/gyms/<int:id>", methods=["GET", "DELETE", "PATCH"])
+def gym_by_id(id):
+    gym = Gym.query.filter(Gym.id == id).one_or_none()
+    if request.method == "GET":
+        if gym:
+            return gym.to_dict()
+        else:
+            return {"error": "404: Gym not found"}, 404
+    elif request.method == "DELETE":
+        if gym:
+            db.session.delete(gym)
+            db.session.commit()
+            return {"message":"Gym Deleted"}, 204
+        return {"error": "404: Team not found"}, 404
+    #!PATCH MAY BE MESSED UP
+    elif request.method == "PATCH":
+        formData = request.get_json()
+        if formData is None:
+            return {"error": "400: Request body missing"}, 400
+        if gym:
+            for attr in formData:
+                setattr(gym, attr, formData[attr])
             
+            db.session.add(gym)
+            db.session.commit()
+            
+            response = make_response(gym.to_dict(), 200)
+            return response 
+        else:
+            return {"error": "404: Team not found"}, 404
+    
+        
 
 if __name__ == '__main__':
     app.run(port=5555)
