@@ -29,13 +29,26 @@ const EmployeeHome = ({user}) => {
     }
 
 
-    const handleEditClick=()=>{
+    const handleEditClick=(route)=>{
         console.log("clicked")
     }
 
-    const handleDeleteClick=()=>{
-        console.log("clicked")
+    //! Handle Delete of route
+    const handleDeleteClick=(route)=>{
+        console.log(route.id)
+        fetch(`/routes/${route.id}`,{
+        method: "DELETE",
+        })
+        .then(r=>r.json)
+        .then(()=>handleDeleteRoute(route))
     }
+
+    const handleDeleteRoute = (deletedRoute) =>{
+        // console.log(deletedRoute)
+        const updatedRouteList = allRoutes.filter((route)=>route.id !== deletedRoute.id)
+        setAllRoutes(updatedRouteList)
+    }
+
 
     //Variable to display all routes as a row in the Table:
     const displayRoutes = allRoutes.map((route) => {
@@ -51,8 +64,8 @@ const EmployeeHome = ({user}) => {
                 <Table.Cell>{route.likes.length}</Table.Cell>
                 <Table.Cell>
                     <div className='table_icons' >
-                        <Icon className='table_icons' name='edit' onClick={handleEditClick} />
-                        <Icon className='table_icons' name='delete' onClick={handleDeleteClick}/>
+                        <Icon className='table_icons' name='edit' onClick={()=>handleEditClick(route)} />
+                        <Icon className='table_icons' name='delete' onClick={()=>handleDeleteClick(route)}/>
                     </div>
                     {/* <Button onClick={()=>deleteTeam(route)}>Delete Route</Button> */}
                 </Table.Cell>
