@@ -65,3 +65,9 @@
   display: block;
   width: 100%;
 }
+
+.table_icons {
+  justify-content: space-between;
+  flex:1;
+  display: flex;
+}

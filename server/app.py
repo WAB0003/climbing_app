@@ -129,6 +129,7 @@ def routes():
         return [route.to_dict() for route in Route.query.all()]
     elif request.method == "POST":
         formData = request.get_json()
+        # import ipdb;ipdb.set_trace()
         try:
             new_route = Route(
                 name=formData.get("name"),
@@ -136,6 +137,7 @@ def routes():
                 video_url=formData.get("video_url"),
                 setter_id=formData.get("setter_id"),
                 gym_id=formData.get("gym_id"),
+                active=formData.get("active")
             )
             db.session.add(new_route)
             db.session.commit()

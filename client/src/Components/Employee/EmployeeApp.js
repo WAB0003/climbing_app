@@ -13,7 +13,7 @@ const EmployeeApp = ({user, updateUser}) => {
         <div>
           <NavEmployee user={user} updateUser={updateUser} />
           <Routes>
-            <Route path="/" element={<EmployeeHome/>}/>
+            <Route path="/" element={<EmployeeHome user={user} />}/>
           </Routes>
         </div>
       )
