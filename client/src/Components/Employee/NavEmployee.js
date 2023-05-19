@@ -1,18 +1,19 @@
 // import { useNavigate } from "react-router-dom"
 import { currentUser } from "../../Recoil/userRecoil"
 import { useRecoilState } from "recoil"
+import { Link, useNavigate } from "react-router-dom";
 
 
 export default function NavEmployee() {
-    // const user = useRecoilValue(currentUser)
-    // const updateUser = useSetRecoilState(currentUser)
     const [ user, updateUser ] = useRecoilState(currentUser)
+    const navigate = useNavigate()
 
     const handleLogout = () => {
         fetch('/logout', { method: 'DELETE'})
           .then(res => {
             if (res.ok) {
               updateUser(null)
+              navigate("/")
             }
           })
      }
@@ -24,7 +25,7 @@ export default function NavEmployee() {
                 <ul>
                     <li>
                         <div>Hello, {user.first_name} </div>
-                        <a onClick={handleLogout}>Logout</a>
+                        <Link onClick={handleLogout}>Logout</Link>
                     </li>
                 </ul>
             </div>

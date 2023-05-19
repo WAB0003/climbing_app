@@ -51,10 +51,9 @@ const LoginPage = () => {
         })
         .then(r=>r.json())
         .then((user)=>{
-            console.log(user)
+            // console.log(user)
             updateUser(user)
         })
-
     }
     
 

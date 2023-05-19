@@ -21,10 +21,8 @@ function App() {
 
 
   //create a statement for USER. If User has Admin quality, then direct user toward employee page, otherwise, go to user page
-  if (user) {
-    if (user.admin ===false)return<UserApp /> 
-    else if (user.admin === true)return <EmployeeApp />
-  } 
-  return <LoginPage />
+  if (!user) return <LoginPage />
+  if (user.admin ===false)return<UserApp /> 
+  else if (user.admin === true)return <EmployeeApp />
 }
 export default App;

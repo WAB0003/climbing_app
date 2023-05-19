@@ -13,7 +13,7 @@ def make_users():
 
     User.query.delete()
     
-    climberBill = User(first_name="Bill", last_name="Brown", username="climberBill", password_hash="chicken", current_gym_id=1)
+    climberBill = User(first_name="Bill", last_name="Brown", username="climberBill", password_hash="chicken")
     climberTom = User(first_name="Tom", last_name="Bean", username="climberTom", password_hash="chicken", current_gym_id=1)
     employeeJim = User(first_name="Jim", last_name="Bob", username="employeeJim", admin=True, password_hash="chicken", current_gym_id=2)
 
