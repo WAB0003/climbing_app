@@ -1,9 +1,10 @@
 import React,  {useState } from 'react'
 import 'semantic-ui-css/semantic.min.css'
-import { Button, Header, Modal } from 'semantic-ui-react'
+import { Button, Header, Modal, Icon } from 'semantic-ui-react'
 import AddRouteForm from './AddRouteForm'
+import UpdateRouteForm from './UpdateRouteForm'
 
-const AddRouteModal = () => {
+const UpdateRouteModal = ({route}) => {
     const [open, setOpen] = useState(false)
 
     return (
@@ -11,12 +12,12 @@ const AddRouteModal = () => {
             onClose={() => setOpen(false)}
             onOpen={() => setOpen(true)}
             open={open}
-            trigger={<Button>Add Route</Button>}
+            trigger={<Icon className='table_icons' name='edit'/>}
         >
-            <Modal.Header>Add New Route</Modal.Header>
-            <Modal.Content>
+            <Modal.Header>Update Existing Route</Modal.Header>
+            <Modal.Content image>
                 <Modal.Description>
-                    <AddRouteForm setOpen={setOpen} />
+                    <UpdateRouteForm route={route} setOpen={setOpen} />
                 </Modal.Description>
             </Modal.Content>
             <Modal.Actions>
@@ -27,5 +28,5 @@ const AddRouteModal = () => {
         </Modal>
     )
   }
-  
-  export default AddRouteModal;
+
+  export default UpdateRouteModal;

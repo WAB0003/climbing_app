@@ -7,6 +7,7 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 import { currentUser } from '../../Recoil/userRecoil';
 import { currentGyms } from '../../Recoil/gymsRecoil';
 import { currentRoutes } from '../../Recoil/routesRecoil';
+import UpdateRouteModal from './UpdateRouteModal';
 
 
 
@@ -64,10 +65,9 @@ const EmployeeHome = () => {
                 <Table.Cell>{route.likes.length}</Table.Cell>
                 <Table.Cell>
                     <div className='table_icons' >
-                        <Icon className='table_icons' name='edit' onClick={()=>handleEditClick(route)} />
+                        <UpdateRouteModal route={route}/>
                         <Icon className='table_icons' name='delete' onClick={()=>handleDeleteClick(route)}/>
                     </div>
-                    {/* <Button onClick={()=>deleteTeam(route)}>Delete Route</Button> */}
                 </Table.Cell>
             </Table.Row>
         )
