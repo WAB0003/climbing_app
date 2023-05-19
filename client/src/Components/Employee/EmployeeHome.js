@@ -3,9 +3,7 @@ import 'semantic-ui-css/semantic.min.css'
 import { Table, Container, Icon } from 'semantic-ui-react'
 import "../../App.css"
 import AddRouteModal from './AddRouteModal';
-import { useRecoilState, useRecoilValue } from 'recoil';
-import { currentUser } from '../../Recoil/userRecoil';
-import { currentGyms } from '../../Recoil/gymsRecoil';
+import { useRecoilState } from 'recoil';
 import { currentRoutes } from '../../Recoil/routesRecoil';
 import UpdateRouteModal from './UpdateRouteModal';
 
@@ -13,27 +11,8 @@ import UpdateRouteModal from './UpdateRouteModal';
 
 const EmployeeHome = () => {
     const [allRoutes, setAllRoutes] = useRecoilState(currentRoutes)
-    const [allGyms, setAllGyms] = useRecoilState(currentGyms)
-    const user = useRecoilValue(currentUser)
     
     
-    //Get all routes upon initial render:
-    useEffect(()=>{
-        fetch("/routes")
-        .then(r=>r.json())
-        .then(routes=>setAllRoutes(routes))
-    },[])
-    //Get all routes upon initial render:
-    useEffect(()=>{
-        fetch("/gyms")
-        .then(r=>r.json())
-        .then(gyms=>setAllGyms(gyms))
-    },[])
-
-    const handleEditClick=(route)=>{
-        console.log("clicked")
-    }
-
     //! Handle Delete of route
     const handleDeleteClick=(route)=>{
         console.log(route.id)

@@ -11,8 +11,6 @@ export default function NavUser() {
     const updateUser = useSetRecoilState(currentUser)
     const navigate = useNavigate()
     
-    const[isGym, setIsGym]=useState(user.gym)
-    // console.log(isGym)
     
 
     const handleLogout = () => {
@@ -25,6 +23,14 @@ export default function NavUser() {
           })
      }
 
+     const handleRedirect = (e) => {
+        if (user.current_gym){
+            navigate("/routes")
+        }else{
+            navigate("/gyms")
+            alert("In order to view Current Routes, a gym must be selected!\nYou are being directed to gym selection")
+        }
+     }
 
     return (
         <nav className="navbar">
@@ -39,10 +45,10 @@ export default function NavUser() {
                         <Link to="/climbed_routes">Climbed Routes</Link>
                     </li>
                     <li>
-                        <Link to="/routes">Current Routes</Link>
+                        <div onClick={handleRedirect} to="/routes">Current Routes</div>
                     </li>
                     <li>
-                        <div>{isGym ? user.gym.name : "No Gym Selected"}</div>
+                        <div>{user.current_gym ? `Selected Gym: ${user.current_gym.name}` : "No Gym Selected"}</div>
                         <Link to="/gyms">Select Preferred Gym</Link>
                     </li>
                 </ul>

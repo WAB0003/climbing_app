@@ -68,6 +68,31 @@ def check_session():
             return user.to_dict(), 200
         return {},401
 
+#*General USER Routes
+@app.route('/users/<int:id>', methods=["DELETE", "PATCH"])
+def user_by_id(id):
+    user = User.query.filter(User.id == id).one_or_none()
+    if request.method == "DELETE":
+        if user:
+            db.session.delete(user)
+            db.session.commit()
+            return {"message":"User Deleted"}, 204
+        return {"error": "404: User not found"}, 404
+    elif request.method == "PATCH":
+        formData = request.get_json()
+        if formData is None:
+            return {"error": "400: Request body missing"}, 400
+        if user:
+            for attr in formData:
+                setattr(user, attr, formData[attr])
+            
+            db.session.add(user)
+            db.session.commit()
+            
+            response = make_response(user.to_dict(), 200)
+            return response 
+        else:
+            return {"error": "404: User not found"}, 404
 
 
 #!GYM
