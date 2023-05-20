@@ -7,12 +7,15 @@ import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { currentGyms } from './Recoil/gymsRecoil';
 import { currentRoutes } from './Recoil/routesRecoil';
 import { currentUser } from './Recoil/userRecoil';
+import { currentLikes } from './Recoil/likesRecoil';
+
 
 function App() {
 
   const [user, updateUser ] = useRecoilState(currentUser)
   const setAllGyms = useSetRecoilState(currentGyms)
   const setAllRoutes = useSetRecoilState(currentRoutes)
+  const setAllLikes = useSetRecoilState(currentLikes)
 
   //Check if user exists in session already
   useEffect(() => {
@@ -35,6 +38,12 @@ function App() {
       fetch("/gyms")
       .then(r=>r.json())
       .then(gyms=>setAllGyms(gyms))
+  },[])
+
+  useEffect(()=>{
+    fetch("/likes")
+    .then(r=>r.json())
+    .then(likes=>setAllLikes(likes))
   },[])
 
 

@@ -201,7 +201,56 @@ def route_by_id(id):
         else:
             return {"error": "404: Route not found"}, 404
     
-    
+#!LIKES
+#*ALL LIKES
+@app.route('/likes', methods=[ "GET" , "POST" ])
+def likes():
+    if request.method == "GET":
+        return [like.to_dict() for like in Like.query.all()]
+    elif request.method == "POST":
+        formData = request.get_json()
+        # import ipdb;ipdb.set_trace()
+        try:
+            new_like = Like(
+                user_id=formData.get("user_id"),
+                route_id=formData.get("route_id"),
+            )
+            db.session.add(new_like)
+            db.session.commit()
+            return new_like.to_dict(), 201
+        except ValueError:
+            return {"error": "400: Validation errors"}, 400 
+
+#*Like BY ID
+@app.route("/likes/<int:id>", methods=["GET", "DELETE", "PATCH"])
+def like_by_id(id):
+    like = Like.query.filter(Like.id == id).one_or_none()
+    if request.method == "GET":
+        if like:
+            return like.to_dict()
+        else:
+            return {"error": "404: Like not found"}, 404
+    elif request.method == "DELETE":
+        if like:
+            db.session.delete(like)
+            db.session.commit()
+            return {"message":"Like Deleted"}, 204
+        return {"error": "404: Like not found"}, 404
+    elif request.method == "PATCH":
+        formData = request.get_json()
+        if formData is None:
+            return {"error": "400: Request body missing"}, 400
+        if like:
+            for attr in formData:
+                setattr(like, attr, formData[attr])
+            
+            db.session.add(like)
+            db.session.commit()
+            
+            response = make_response(like.to_dict(), 200)
+            return response 
+        else:
+            return {"error": "404: Like not found"}, 404
 
 if __name__ == '__main__':
     app.run(port=5555)

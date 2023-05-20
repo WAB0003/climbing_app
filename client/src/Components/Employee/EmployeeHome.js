@@ -19,7 +19,7 @@ const EmployeeHome = () => {
         fetch(`/routes/${route.id}`,{
         method: "DELETE",
         })
-        .then(r=>r.json)
+        // .then(r=>r.json())
         .then(()=>handleDeleteRoute(route))
     }
 
