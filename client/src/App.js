@@ -3,10 +3,10 @@ import { useEffect, useState } from 'react';
 import LoginPage from './Components/LoginPage';
 import UserApp from './Components/User/UserApp';
 import EmployeeApp from './Components/Employee/EmployeeApp';
-import { useRecoilState, useSetRecoilState } from 'recoil';
-import { currentUser } from './Recoil/userRecoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { currentGyms } from './Recoil/gymsRecoil';
 import { currentRoutes } from './Recoil/routesRecoil';
+import { currentUser } from './Recoil/userRecoil';
 
 function App() {
 

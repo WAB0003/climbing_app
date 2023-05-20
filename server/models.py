@@ -26,7 +26,8 @@ class User(db.Model, SerializerMixin):
                        "-routes.likes",
                        
                        "-likes.user_id",
-                       "-likes.route_id",
+                       "-likes.created_at",
+                       "-likes.updated_at",
                        "-likes.route",
                        "-likes.user"              
                     )
