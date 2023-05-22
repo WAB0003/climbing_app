@@ -25,9 +25,13 @@ class User(db.Model, SerializerMixin):
                        "-routes.setter",
                        "-routes.likes",
                        
-                       "-likes.user_id",
+                        "-likes.user_id",
                        "-likes.created_at",
                        "-likes.updated_at",
+                       "-likes.route",
+                       "-likes.user", 
+                       
+                       "-climbs.user_id",
                        "-likes.route",
                        "-likes.user"              
                     )
@@ -45,6 +49,7 @@ class User(db.Model, SerializerMixin):
     current_gym = db.relationship("Gym", back_populates="users")
     routes = db.relationship("Route", back_populates="setter")
     likes = db.relationship("Like", back_populates="user")
+    climbs = db.relationship("Climb", back_populates="user")
     
     @hybrid_property
     def password_hash(self):
@@ -94,7 +99,11 @@ class Route(db.Model, SerializerMixin):
                        "-likes.updated_at",
                        "-likes.route_id",
                        "-likes.user",
-                       "-likes.route"
+                       "-likes.route",
+                       
+                       "-climbs.route_id",
+                       "-climbs.user",
+                       "-climbs.route"
                     )
 
     id = db.Column(db.Integer, primary_key=True)
@@ -113,6 +122,7 @@ class Route(db.Model, SerializerMixin):
     gym = db.relationship("Gym", back_populates="routes")
     setter = db.relationship("User", back_populates="routes")
     likes = db.relationship("Like", back_populates="route")
+    climbs = db.relationship("Climb", back_populates="route")
     
     def __repr__(self):
             return f'<Route {self.name}>'
@@ -146,6 +156,25 @@ class Gym(db.Model, SerializerMixin):
 #!Like Join Table
 class Like(db.Model, SerializerMixin):
     __tablename__ = 'likes'
+    
+    serialize_rules = ( "-route.active",
+                        "-route.gym", 
+                        "-route.likes", 
+                        "-route.rating",
+                        "-route.setter",
+                        "-route.video_url",
+                        "-route.climbs",
+                        "-route_id",
+                        
+                        "-user._password_hash",
+                        "-user.admin",
+                        "-user.current_gym",
+                        "-user.likes",
+                        "-user.routes",
+                        "-user.climbs",
+                        "-user_id"           
+                       
+    )
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
@@ -153,6 +182,44 @@ class Like(db.Model, SerializerMixin):
     
     route = db.relationship("Route", back_populates="likes")
     user = db.relationship("User", back_populates="likes")
+    
+    created_at = db.Column(db.DateTime, server_default=db.func.now())
+    updated_at = db.Column(db.DateTime, onupdate=db.func.now())
+    
+    def __repr__(self):
+        return f'<Like {self.id}>'
+    
+    
+#!CLIMBED Join Table
+class Climb(db.Model, SerializerMixin):
+    __tablename__ = 'climbs'
+    
+    serialize_rules = ( "-route.active",
+                        "-route.gym", 
+                        "-route.likes", 
+                        "-route.rating",
+                        "-route.setter",
+                        "-route.video_url",
+                        "-route.climbs",
+                        "-route_id",
+                        
+                        "-user._password_hash",
+                        "-user.admin",
+                        "-user.current_gym",
+                        "-user.likes",
+                        "-user.routes",
+                        "-user.climbs",
+                        "-user_id"           
+                       
+    )
+
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
+    route_id = db.Column(db.Integer, db.ForeignKey("routes.id"))
+    user_video = db.Column(db.String)
+    
+    route = db.relationship("Route", back_populates="climbs")
+    user = db.relationship("User", back_populates="climbs")
     
     created_at = db.Column(db.DateTime, server_default=db.func.now())
     updated_at = db.Column(db.DateTime, onupdate=db.func.now())

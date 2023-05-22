@@ -4,7 +4,7 @@ from werkzeug.exceptions import NotFound, Unauthorized
 
 from config import app, db, api
 
-from models import db, User, Gym, Like, Route
+from models import db, User, Gym, Like, Route, Climb
 
 CORS(app)
 
@@ -251,6 +251,57 @@ def like_by_id(id):
             return response 
         else:
             return {"error": "404: Like not found"}, 404
+        
+#!CLIMBS
+#*ALL CLIMBS
+@app.route('/climbs', methods=[ "GET" , "POST" ])
+def climbs():
+    if request.method == "GET":
+        return [climb.to_dict() for climb in Climb.query.all()]
+    elif request.method == "POST":
+        formData = request.get_json()
+        # import ipdb;ipdb.set_trace()
+        try:
+            new_climb = Climb(
+                user_id=formData.get("user_id"),
+                route_id=formData.get("route_id"),
+            )
+            db.session.add(new_climb)
+            db.session.commit()
+            return new_climb.to_dict(), 201
+        except ValueError:
+            return {"error": "400: Validation errors"}, 400 
+
+#*Climb BY ID
+@app.route("/climbs/<int:id>", methods=["GET", "DELETE", "PATCH"])
+def climb_by_id(id):
+    climb = Climb.query.filter(Climb.id == id).one_or_none()
+    if request.method == "GET":
+        if climb:
+            return climb.to_dict()
+        else:
+            return {"error": "404: Climb not found"}, 404
+    elif request.method == "DELETE":
+        if climb:
+            db.session.delete(climb)
+            db.session.commit()
+            return {"message":"Climb Deleted"}, 204
+        return {"error": "404: Climb not found"}, 404
+    elif request.method == "PATCH":
+        formData = request.get_json()
+        if formData is None:
+            return {"error": "400: Request body missing"}, 400
+        if climb:
+            for attr in formData:
+                setattr(climb, attr, formData[attr])
+            
+            db.session.add(climb)
+            db.session.commit()
+            
+            response = make_response(climb.to_dict(), 200)
+            return response 
+        else:
+            return {"error": "404: Climb not found"}, 404
 
 if __name__ == '__main__':
     app.run(port=5555)

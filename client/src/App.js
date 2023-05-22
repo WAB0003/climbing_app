@@ -8,6 +8,7 @@ import { currentGyms } from './Recoil/gymsRecoil';
 import { currentRoutes } from './Recoil/routesRecoil';
 import { currentUser } from './Recoil/userRecoil';
 import { currentLikes } from './Recoil/likesRecoil';
+import { currentClimbs } from './Recoil/climbsRecoil';
 
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
   const setAllGyms = useSetRecoilState(currentGyms)
   const setAllRoutes = useSetRecoilState(currentRoutes)
   const setAllLikes = useSetRecoilState(currentLikes)
+  const setAllClimbs = useSetRecoilState(currentClimbs)
 
   //Check if user exists in session already
   useEffect(() => {
@@ -33,7 +35,7 @@ function App() {
     .then(r=>r.json())
     .then(routes=>setAllRoutes(routes))
   },[])
-  //Get all routes upon initial render:
+  //Get all gyms upon initial render:
   useEffect(()=>{
       fetch("/gyms")
       .then(r=>r.json())
@@ -44,6 +46,13 @@ function App() {
     fetch("/likes")
     .then(r=>r.json())
     .then(likes=>setAllLikes(likes))
+  },[])
+
+  //Get all routes upon initial render:
+  useEffect(()=>{
+    fetch("/climbs")
+    .then(r=>r.json())
+    .then(routes=>setAllRoutes(routes))
   },[])
 
 
