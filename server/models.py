@@ -195,13 +195,13 @@ class Climb(db.Model, SerializerMixin):
     __tablename__ = 'climbs'
     
     serialize_rules = ( "-route.active",
-                        "-route.gym", 
                         "-route.likes", 
-                        "-route.rating",
-                        "-route.setter",
                         "-route.video_url",
                         "-route.climbs",
                         "-route_id",
+                        "-route.setter.username",
+                        "-route.setter.climbs",
+                        "-route.setter.admin",
                         
                         "-user._password_hash",
                         "-user.admin",

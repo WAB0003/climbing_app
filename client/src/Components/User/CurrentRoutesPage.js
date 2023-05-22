@@ -2,7 +2,6 @@ import { useRecoilValue } from "recoil";
 import { currentUser } from "../../Recoil/userRecoil";
 import { currentRoutes } from "../../Recoil/routesRecoil";
 import { Table, Container } from "semantic-ui-react";
-import { useState } from "react";
 import CurrentRouteRow from "./CurrentRouteRow";
 
 
