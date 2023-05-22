@@ -13,7 +13,6 @@ const ClimbedRoutesPage = () => {
   const userClimbs = allClimbs.filter((climb)=>(climb.user.id=== user.id))
   const displayClimbs = userClimbs.map((climb) => <ClimbedRouteRow key={climb.id} climb= {climb} />)
 
-  console.log(userClimbs)
   
   return(
       <div>

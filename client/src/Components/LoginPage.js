@@ -28,12 +28,10 @@ const LoginPage = () => {
         setFormData({...formData, 
             [e.target.name]:e.target.value,
         })
-        // console.log(formData)
     }
 
     const handleSubmit = () => {
         //Create an object to be passed to database
-        // console.log("submit button")
         const userObj = {
             first_name: formData.first_name,
             last_name: formData.last_name,
@@ -51,7 +49,6 @@ const LoginPage = () => {
         })
         .then(r=>r.json())
         .then((user)=>{
-            // console.log(user)
             updateUser(user)
         })
     }

@@ -71,3 +71,9 @@
   flex:1;
   display: flex;
 }
+
+.user_video {
+  justify-content: center;
+  flex: 1;
+  display: flex;
+}

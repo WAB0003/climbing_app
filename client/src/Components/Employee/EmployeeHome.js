@@ -15,7 +15,6 @@ const EmployeeHome = () => {
     
     //! Handle Delete of route
     const handleDeleteClick=(route)=>{
-        console.log(route.id)
         fetch(`/routes/${route.id}`,{
         method: "DELETE",
         })
@@ -24,7 +23,6 @@ const EmployeeHome = () => {
     }
 
     const handleDeleteRoute = (deletedRoute) =>{
-        // console.log(deletedRoute)
         const updatedRouteList = allRoutes.filter((route)=>route.id !== deletedRoute.id)
         setAllRoutes(updatedRouteList)
     }

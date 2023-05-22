@@ -28,7 +28,7 @@ const UpdateRouteForm = ({ route, setOpen }) =>{
 
     // Destruction state of FormData:
     const { name, rating, video_url, gym_id, active } = formData
-    //   console.log(formData)
+
     //! Handle form changes
     const handleChange = (e) => {
         setFormData({...formData, 
@@ -41,7 +41,7 @@ const UpdateRouteForm = ({ route, setOpen }) =>{
             active:!isActive,
         })
     }
-    // console.log(formData)
+
     
     //! Handle Submit
     const handleSubmit = () => {
@@ -54,7 +54,7 @@ const UpdateRouteForm = ({ route, setOpen }) =>{
             gym_id: gym_id,
             active: active,
           }
-          console.log(newRouteObj)
+
         
         fetch (`/routes/${route.id}`, {
             method: "PATCH",

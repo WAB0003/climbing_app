@@ -26,7 +26,6 @@ const AddRouteForm = ({ setOpen }) =>{
 
     // Destruction state of FormData:
     const { name, rating, video_url, gym_id } = formData
-    //   console.log(formData)
     //! Handle form changes
     const handleChange = (e) => {
         setFormData({...formData, 
@@ -46,7 +45,6 @@ const AddRouteForm = ({ setOpen }) =>{
             gym_id: gym_id,
             active: true,
           }
-          console.log(newRouteObj)
         
         //add team to database
         fetch("/routes", {

@@ -15,7 +15,7 @@ const CurrentRouteRow = ({route}) => {
 
     //get individual Like for the specific route and user:
     const likeArray = allLikes.filter((like)=>{
-        // console.log(like)
+   
         if (like.user.id === user.id && like.route.id === route.id) {
             return like
         }
