@@ -1,5 +1,6 @@
 import { useRecoilValue } from "recoil";
 import { currentGyms } from "../../Recoil/gymsRecoil";
+import { Card } from "semantic-ui-react";
 import GymCard from "./GymCard";
 
 
@@ -12,7 +13,9 @@ const SelectGymsPage = () => {
     return(
         <>
             <h1>Select A Gym</h1>
-            {gymdisplay}
+            <Card.Group>
+                {gymdisplay}
+            </Card.Group>
         </>
 
       )

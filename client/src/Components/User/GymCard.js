@@ -26,7 +26,6 @@ const GymCard = ({gym}) => {
         
 
     return(
-        <Card.Group>
             <Card>
             <Card.Content>
                 <Card.Header>{gym.name}</Card.Header>
@@ -39,7 +38,6 @@ const GymCard = ({gym}) => {
                 <Button fluid basic color='green' onClick={updateUserGym}>Select</Button>
             </Card.Content>
             </Card>
-        </Card.Group>
     )
 }
 
