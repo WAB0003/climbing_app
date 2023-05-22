@@ -12,8 +12,6 @@ const CurrentRouteRow = ({route}) => {
 
     const allRouteLikes = allLikes.filter((like)=>like.route.id === route.id)
 
-    console.log(allClimbs)
-
 
     //get individual Like for the specific route and user:
     const likeArray = allLikes.filter((like)=>{
@@ -34,7 +32,7 @@ const CurrentRouteRow = ({route}) => {
     })
     // above filter gives a list of "1" climb. Needs to get the actual object of like if it exists. 
     const specificClimb = climbArray[0]
-    console.log(specificClimb)
+    // console.log(specificClimb)
 
     //!Like (HEART) BUTTON
     //Variable to display all ACTIVE routes for the SELECTED Gym:

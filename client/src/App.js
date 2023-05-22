@@ -52,7 +52,7 @@ function App() {
   useEffect(()=>{
     fetch("/climbs")
     .then(r=>r.json())
-    .then(routes=>setAllRoutes(routes))
+    .then(climbs=>setAllClimbs(climbs))
   },[])
 
 

@@ -12,8 +12,11 @@ const CurrentRoutesPage = () => {
     const user = useRecoilValue(currentUser)
     const gym_id = user.current_gym.id
     
+    // debugger
     const ActiveGymRoutes = allRoutes.filter((route)=>(route.gym.id === gym_id) && (route.active))
     const displayRoutes = ActiveGymRoutes.map((route) => <CurrentRouteRow key={route.id} route= {route} />)
+
+    // console.log(ActiveGymRoutes)
     
     return(
         <div>

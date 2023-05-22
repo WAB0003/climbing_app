@@ -5,7 +5,7 @@ from random import randint, choice
 from faker import Faker
 
 from app import app
-from models import db, User, Gym, Like, Route
+from models import db, User, Gym, Like, Route, Climb
 
 fake = Faker()
 
@@ -55,6 +55,11 @@ def make_likes():
     
     db.session.add_all([like1, like2, like3, like4, like5, like6, like7])
     db.session.commit()
+    
+def delete_climbs():
+    Climb.query.delete()
+    print("delete climb table")
+    db.session.commit()
         
         
     
@@ -67,3 +72,4 @@ if __name__ == '__main__':
         make_gyms()
         make_routes()
         make_likes()
+        delete_climbs()
