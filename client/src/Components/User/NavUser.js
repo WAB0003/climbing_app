@@ -37,19 +37,18 @@ export default function NavUser() {
             <div className="nav-menu">
                 <ul>
                     <li>
-                        <div>Hello, {user.first_name} </div>
-                        <Link onClick={handleLogout}>Logout</Link>
-                    </li>
-                    <li>Favorite Routes</li>
-                    <li>
-                        <Link to="/climbed_routes">Climbed Routes</Link>
+                        <h3>Hello, {user.first_name} </h3>
+                        <Link className="nav_button_secondary" onClick={handleLogout}>Logout</Link>
                     </li>
                     <li>
-                        <div onClick={handleRedirect} to="/routes">Current Routes</div>
+                        <Link className="nav_button" to="/climbed_routes">Climbed Routes</Link>
                     </li>
                     <li>
-                        <div>{user.current_gym ? `Selected Gym: ${user.current_gym.name}` : "No Gym Selected"}</div>
-                        <Link to="/gyms">Select Preferred Gym</Link>
+                        <div className="nav_button" onClick={handleRedirect} to="/routes">Current Routes</div>
+                    </li>
+                    <li>
+                        <h3>{user.current_gym ? `Selected Gym: ${user.current_gym.name}` : "No Gym Selected"}</h3>
+                        <Link className="nav_button_secondary"  to="/gyms">Select Preferred Gym</Link>
                     </li>
                 </ul>
             </div>

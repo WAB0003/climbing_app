@@ -24,23 +24,48 @@ def make_users():
     
 def make_gyms():
     Gym.query.delete()
+    print("Deleted all Users...")
     
-    gym1 = Gym(name="Poplar", address="South Seattle Road" , phone=2565555555 )
-    gym2 = Gym(name="Freemont", address="Stoneway St" , phone=2565555555 )
+    gym1 = Gym(name="Poplar", street="900 Poplar PI St", city="Seattle", state="WA", zipcode="98144", phone=5555555555)
+    gym2 = Gym(name="Fremont",  street="3535 Interlake Ave N", city="Seattle", state="WA", zipcode="98103", phone=5555555555)
     
     db.session.add_all([gym1, gym2])
     db.session.commit()
+    print("Created 2 Standard gyms...")
 
 def make_routes():
     Route.query.delete()
+    print("Deleted all Routes...")
     
     route_list = []
-    for each_route in range(8):
-        route = Route(name=fake.company(), rating=randint(0,6), video_url="video url", setter_id=3, gym_id=choice([1,2]), active=choice([True, False]))
+    route_names = ["Big Cheesey",
+                   "The Snail",
+                   "TableTop",
+                   "The Crab",
+                   "Coles Crack",
+                   "Strange Persuit",
+                   "Gandalf",
+                   "Crimp, Slap, Throw",
+                   "Spanky", 
+                   "Cowardly Lion",
+                   "Moon dog",
+                   "Bananas", 
+                  "Abstraction",
+                   "Problem Child", 
+                   "Dirty Dude", 
+                   "Blood Diamond", 
+                   "Pony Ride", 
+                   "Cougarmilk",
+                   "Kona's Bulge",
+                   "Plastic Slapper"]
+    
+    for each_route in route_names:
+        route = Route(name=each_route, rating=randint(0,6), video_url="video url", setter_id=choice([2,3]), gym_id=choice([1,2]), active=choice([True, False]))
         route_list.append(route)
     
     db.session.add_all(route_list)
     db.session.commit()
+    print("Created routes...")
     
     
 def make_likes():
@@ -59,7 +84,7 @@ def make_likes():
     
 def delete_climbs():
     Climb.query.delete()
-    print("delete climb table")
+    print("Delete climb table")
     db.session.commit()
         
         

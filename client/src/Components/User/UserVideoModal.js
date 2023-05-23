@@ -11,9 +11,9 @@ const UserVideoModal = ({climb}) => {
             onClose={() => setOpen(false)}
             onOpen={() => setOpen(true)}
             open={open}
-            trigger={<Icon className='table_icons' color="green" name='video'/>}
+            trigger={<Icon className='table_icon' color="green" name='video'/>}
         >
-            <Modal.Header>Your Climb</Modal.Header>
+            <Modal.Header>Congrats! You climbed '{climb.route.name}'</Modal.Header>
             <Modal.Content className="user_video" >
                     <VideoPlayer climb={climb} />
             </Modal.Content>

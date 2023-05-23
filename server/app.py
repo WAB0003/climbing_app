@@ -40,7 +40,17 @@ def login():
             response = make_response(user.to_dict(), 200)
             return response
         else:
-            raise Unauthorized
+            return {"testing"},401
+            raise NotFound
+        
+@app.errorhandler(NotFound)
+def handle_not_found(e):
+    response = make_response(
+        "Not Found: Sorry the resource you are looking for does not exist",
+        404
+    )
+
+    return response
          
 
 @app.errorhandler(Unauthorized)

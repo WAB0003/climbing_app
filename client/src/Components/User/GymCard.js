@@ -26,11 +26,13 @@ const GymCard = ({gym}) => {
         
 
     return(
-            <Card>
-            <Card.Content>
+            <Card className='gym_card' >
+            <Card.Content >
                 <Card.Header>{gym.name}</Card.Header>
                 <Card.Description>Address:</Card.Description>
-                <Card.Meta>{gym.address}</Card.Meta>
+                <Card.Meta>{gym.street}</Card.Meta>
+                <Card.Meta>{gym.city}, {gym.state} {gym.zipcode}</Card.Meta>
+                <Card.Meta></Card.Meta>
                 <Card.Description>Phone:</Card.Description>
                 <Card.Meta>{gym.phone}</Card.Meta>
             </Card.Content>

@@ -36,14 +36,13 @@ const EmployeeHome = () => {
                 <Table.Cell>{route.active?"Active":""}</Table.Cell>
                 <Table.Cell>{route.name}</Table.Cell>
                 <Table.Cell>V-{route.rating}</Table.Cell>
-                <Table.Cell>{route.video_url}</Table.Cell>
                 <Table.Cell>{route.setter.first_name} {route.setter.last_name}</Table.Cell>
                 <Table.Cell>{route.gym.name}</Table.Cell>
                 <Table.Cell>{route.likes.length}</Table.Cell>
                 <Table.Cell>
                     <div className='table_icons' >
                         <UpdateRouteModal route={route}/>
-                        <Icon className='table_icons' name='delete' onClick={()=>handleDeleteClick(route)}/>
+                        <Icon className='table_icon' name='delete' onClick={()=>handleDeleteClick(route)}/>
                     </div>
                 </Table.Cell>
             </Table.Row>
@@ -53,7 +52,7 @@ const EmployeeHome = () => {
 
     return(
         <div>
-            <h1>Employee Home</h1>
+            <h1 className='User_Page_Titles' >Employee Home</h1>
             <Container >
                 {<AddRouteModal />}
                 <Table celled>
@@ -63,7 +62,6 @@ const EmployeeHome = () => {
                             <Table.HeaderCell>Active</Table.HeaderCell>
                             <Table.HeaderCell>Name</Table.HeaderCell>
                             <Table.HeaderCell>Rating</Table.HeaderCell>
-                            <Table.HeaderCell>Video</Table.HeaderCell>
                             <Table.HeaderCell>Setter</Table.HeaderCell>
                             <Table.HeaderCell>Gym</Table.HeaderCell>
                             <Table.HeaderCell>Likes</Table.HeaderCell>

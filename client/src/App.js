@@ -35,6 +35,7 @@ function App() {
     .then(r=>r.json())
     .then(routes=>setAllRoutes(routes))
   },[])
+  
   //Get all gyms upon initial render:
   useEffect(()=>{
       fetch("/gyms")

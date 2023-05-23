@@ -12,7 +12,7 @@ const UpdateRouteModal = ({route}) => {
             onClose={() => setOpen(false)}
             onOpen={() => setOpen(true)}
             open={open}
-            trigger={<Icon className='table_icons' name='edit'/>}
+            trigger={<Icon className='table_icon' name='edit'/>}
         >
             <Modal.Header>Update Existing Route</Modal.Header>
             <Modal.Content image>

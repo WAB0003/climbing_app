@@ -12,8 +12,8 @@ const SelectGymsPage = () => {
 
     return(
         <>
-            <h1>Select A Gym</h1>
-            <Card.Group>
+            <h1 className="User_Page_Titles" >Select A Gym</h1>
+            <Card.Group className="all_gyms" >
                 {gymdisplay}
             </Card.Group>
         </>

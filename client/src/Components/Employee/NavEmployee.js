@@ -24,8 +24,8 @@ export default function NavEmployee() {
             <div className="nav-menu">
                 <ul>
                     <li>
-                        <div>Hello, {user.first_name} </div>
-                        <Link onClick={handleLogout}>Logout</Link>
+                        <h3>Hello,  {user.first_name} </h3>
+                        <Link className="nav_button_secondary" onClick={handleLogout}>Logout</Link>
                     </li>
                 </ul>
             </div>

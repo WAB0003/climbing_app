@@ -19,15 +19,14 @@ const UpdateRouteForm = ({ route, setOpen }) =>{
 
     // Create state to handle form:
     const [formData, setFormData] = useState({
-        name: "",
-        rating:"",
-        video_url:"",
+        name: route.name,
+        rating:route.rating,
         gym_id: route.gym_id,
         active: isActive
       })
 
     // Destruction state of FormData:
-    const { name, rating, video_url, gym_id, active } = formData
+    const { name, rating, gym_id, active } = formData
 
     //! Handle form changes
     const handleChange = (e) => {
@@ -49,13 +48,12 @@ const UpdateRouteForm = ({ route, setOpen }) =>{
         const newRouteObj = {
             name: name,
             rating: rating, 
-            video_url: video_url, 
             setter_id: user.id,
             gym_id: gym_id,
             active: active,
           }
 
-        
+        //*Update Route
         fetch (`/routes/${route.id}`, {
             method: "PATCH",
             headers: {
@@ -91,10 +89,6 @@ const UpdateRouteForm = ({ route, setOpen }) =>{
             <Form.Field>
                 <label>Rating</label>
                 <input placeholder={route.rating} name="rating" value={rating} onChange={handleChange}/>
-            </Form.Field>
-            <Form.Field>
-                <label>Video URL</label>
-                <input placeholder={route.video_url} name="video_url" value={video_url} onChange={handleChange}/>
             </Form.Field>
             <Form.Field label='Select Gym' control='select' name="gym_id"  onClick={handleChange}>
 

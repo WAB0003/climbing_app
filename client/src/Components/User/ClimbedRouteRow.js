@@ -19,11 +19,9 @@ const ClimbedRouteRow = ({climb}) => {
             <Table.Cell>{climb.route.setter.first_name} {climb.route.setter.last_name}</Table.Cell>
             <Table.Cell>{climb.route.gym.name}</Table.Cell>
             <Table.Cell>{climb.created_at}</Table.Cell>
-            <Table.Cell>
-                {climb.user_video ? <UserVideoModal climb={climb} /> : "No video"}
-            </Table.Cell>
-            <Table.Cell>
+            <Table.Cell className='table_icons' >
                 <UploadWidget climb={climb} />
+                {climb.user_video ? <UserVideoModal climb={climb} /> : ""}
             </Table.Cell>
         </Table.Row>
     )

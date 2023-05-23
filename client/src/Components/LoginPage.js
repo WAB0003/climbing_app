@@ -5,14 +5,16 @@ import { Container, Button, Form } from 'semantic-ui-react'
 import { Navigate } from 'react-router-dom'
 import { currentUser } from '../Recoil/userRecoil'
 import { useSetRecoilState } from 'recoil'
+import main_logo from '../images/main_logo.jpg'
 
 
 const LoginPage = () => {
+
     //!State Variables
+    const [errors, setErrors] = useState(null)
     const [signUp, setSignUp] = useState(false)
     const updateUser = useSetRecoilState(currentUser)
-    // const history = useHistory()
-    // const [errors, setErrors] = useState(null)
+
     const [formData, setFormData] = useState({
         first_name: "",
         last_name: "", 
@@ -20,9 +22,12 @@ const LoginPage = () => {
         password: "",
       })
 
-
+    
     //!Form Functions
-    const handlClick = () => setSignUp((signUp)=>!signUp)
+    const handlClick = () => {
+        setSignUp((signUp)=>!signUp)
+        setErrors(null)
+    }
 
     const handleChange = (e) => {
         setFormData({...formData, 
@@ -32,6 +37,7 @@ const LoginPage = () => {
 
     const handleSubmit = () => {
         //Create an object to be passed to database
+        setErrors(null)
         const userObj = {
             first_name: formData.first_name,
             last_name: formData.last_name,
@@ -47,15 +53,22 @@ const LoginPage = () => {
             },
             body: JSON.stringify(userObj)
         })
-        .then(r=>r.json())
-        .then((user)=>{
-            updateUser(user)
+        .then(r => {
+            if (r.ok){r.json().then((user)=>{updateUser(user)})}
+            else {signUp ? setErrors("Username MUST be unique") : setErrors("Login Doesn't Exist")}
         })
     }
     
 
     return (
         <>
+        <div className='main_logo'>
+            <img className='logo_img' src={main_logo} alt='Main Logo' />
+            <div>
+                <div>BOULDER</div>
+                <div>CLIMB</div>
+            </div>
+        </div>
         <div className='loginContainer' >
             <Form className='loginForm' >
                 {signUp&&(
@@ -78,8 +91,11 @@ const LoginPage = () => {
                     <label>Password</label>
                     <input type='password' placeholder='Enter Password Here' name="password" value={formData.password} onChange={handleChange}/>
                 </Form.Field>
-                <Button type='submit' onClick={handleSubmit}>Submit</Button>
-                <Button onClick={handlClick}>{signUp?"Login" : "Signup"}</Button>
+                <div className='Login_btn_container' >
+                    <Button type='submit' onClick={handleSubmit}>Submit</Button>
+                    <Button onClick={handlClick}>{signUp?"Back to Login" : "Signup"}</Button>
+                </div>
+                <div style={{paddingTop:"10px", textAlign:'right'  }} >{errors ? errors : "" }</div>
             </Form>
         </div>
         </>

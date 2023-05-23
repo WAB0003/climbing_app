@@ -15,14 +15,12 @@ const CurrentRouteRow = ({route}) => {
 
     //get individual Like for the specific route and user:
     const likeArray = allLikes.filter((like)=>{
-   
         if (like.user.id === user.id && like.route.id === route.id) {
             return like
         }
     })
     //above filter gives a list of "1" like. Needs to get the actual object of like if it exists. 
     const specificLike = likeArray[0]
-    // console.log(specificLike)
 
     //get individual Climb for the specific route and user:
     const climbArray = allClimbs.filter((climb)=>{
@@ -100,13 +98,12 @@ const CurrentRouteRow = ({route}) => {
         <Table.Row key={route.id}>
             <Table.Cell>{route.name}</Table.Cell>
             <Table.Cell>V-{route.rating}</Table.Cell>
-            <Table.Cell>{route.video_url}</Table.Cell>
             <Table.Cell>{route.setter.first_name} {route.setter.last_name}</Table.Cell>
             <Table.Cell>{allRouteLikes.length}</Table.Cell>
             <Table.Cell>
                 <div className='table_icons' >
-                    <Icon className='table_icons'  color={(specificLike) ? "green" : "grey"} name='heart' onClick={handleLikeButton}/>
-                    <Icon className='table_icons'  color={(specificClimb) ? "green" : "grey"} name='check' onClick={handleCheckButton}/>
+                    <Icon className='table_icon'  color={(specificLike) ? "green" : "grey"} name='heart' onClick={handleLikeButton}/>
+                    <Icon className='table_icon'  color={(specificClimb) ? "green" : "grey"} name='check' onClick={handleCheckButton}/>
                 </div>
             </Table.Cell>
         </Table.Row>

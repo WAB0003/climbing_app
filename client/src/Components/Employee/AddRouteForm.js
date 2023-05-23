@@ -20,12 +20,11 @@ const AddRouteForm = ({ setOpen }) =>{
     const [formData, setFormData] = useState({
         name: "",
         rating:"",
-        video_url:"",
         gym_id:1
       })
 
     // Destruction state of FormData:
-    const { name, rating, video_url, gym_id } = formData
+    const { name, rating, gym_id } = formData
     //! Handle form changes
     const handleChange = (e) => {
         setFormData({...formData, 
@@ -40,7 +39,6 @@ const AddRouteForm = ({ setOpen }) =>{
         const newRouteObj = {
             name: name,
             rating: rating, 
-            video_url: video_url, 
             setter_id: user.id,
             gym_id: gym_id,
             active: true,
@@ -74,10 +72,6 @@ const AddRouteForm = ({ setOpen }) =>{
             <Form.Field>
                 <label>Rating</label>
                 <input placeholder="Enter Rating (example: Type '3' for V-3)" name="rating" value={rating} onChange={handleChange}/>
-            </Form.Field>
-            <Form.Field>
-                <label>Video URL</label>
-                <input placeholder="Enter Video URL" name="video_url" value={video_url} onChange={handleChange}/>
             </Form.Field>
             <Form.Field label='Select Gym' control='select' name="gym_id"  onChange={handleChange}>
                 {displayGyms}
