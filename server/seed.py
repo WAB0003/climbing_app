@@ -12,13 +12,14 @@ fake = Faker()
 def make_users():
 
     User.query.delete()
-    
+    print("Deleted all Users...")
     climberBill = User(first_name="Bill", last_name="Brown", username="climberBill", password_hash="chicken")
-    climberTom = User(first_name="Tom", last_name="Bean", username="climberTom", password_hash="chicken", current_gym_id=1)
-    employeeJim = User(first_name="Jim", last_name="Bob", username="employeeJim", admin=True, password_hash="chicken", current_gym_id=2)
+    employeeJack = User(first_name="Jack", last_name="Daniels", username="climberTom", password_hash="chicken", current_gym_id=1)
+    employeeJim = User(first_name="Jim", last_name="Beam", username="employeeJim", admin=True, password_hash="chicken", current_gym_id=2)
 
-    db.session.add_all([climberBill, climberTom, employeeJim])
+    db.session.add_all([climberBill, employeeJack, employeeJim])
     db.session.commit()
+    print("Created 3 Standard Users...")
     
     
 def make_gyms():

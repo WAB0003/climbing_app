@@ -56,8 +56,8 @@ const LoginPage = () => {
 
     return (
         <>
-        <Container textAlign='left' >
-            <Form >
+        <div className='loginContainer' >
+            <Form className='loginForm' >
                 {signUp&&(
                     <>
                         <Form.Field>
@@ -81,7 +81,7 @@ const LoginPage = () => {
                 <Button type='submit' onClick={handleSubmit}>Submit</Button>
                 <Button onClick={handlClick}>{signUp?"Login" : "Signup"}</Button>
             </Form>
-        </Container>
+        </div>
         </>
 
     )
