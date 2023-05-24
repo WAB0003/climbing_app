@@ -14,10 +14,12 @@ def make_users():
     User.query.delete()
     print("Deleted all Users...")
     climberBill = User(first_name="Bill", last_name="Brown", username="climberBill", password_hash="chicken")
-    employeeJack = User(first_name="Jack", last_name="Daniels", username="climberTom", password_hash="chicken", current_gym_id=1)
+    employeeJack = User(first_name="Jack", last_name="Daniels", username="employeeJack", admin=True, password_hash="chicken", current_gym_id=1)
     employeeJim = User(first_name="Jim", last_name="Beam", username="employeeJim", admin=True, password_hash="chicken", current_gym_id=2)
+    climberTom = User(first_name="Tom", last_name="Jones", username="climberTom", password_hash="chicken", current_gym_id=1)
+    
 
-    db.session.add_all([climberBill, employeeJack, employeeJim])
+    db.session.add_all([climberBill, employeeJack, employeeJim, climberTom])
     db.session.commit()
     print("Created 3 Standard Users...")
     
@@ -85,11 +87,15 @@ def make_likes():
 def delete_climbs():
     Climb.query.delete()
     print("Delete climb table")
+    example_route = Route.query.filter((Route.active ==True) and (Route.gym_id == 1)).first()
+    # print(example_route.id)
+    oneClimbExammple = Climb(user_video="userVideos/db67025e61fe34a1c157da63f63d1265", user_id = 4, route_id=example_route.id)
+    db.session.add(oneClimbExammple)
     db.session.commit()
         
         
     
-    # import ipdb; ipdb.set_trace()
+    import ipdb; ipdb.set_trace()
 
 
 if __name__ == '__main__':
