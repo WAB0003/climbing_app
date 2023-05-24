@@ -64,9 +64,9 @@ const LoginPage = () => {
         <>
         <div className='main_logo'>
             <img className='logo_img' src={main_logo} alt='Main Logo' />
-            <div>
-                <div>BOULDER</div>
-                <div>CLIMB</div>
+            <div className='logo_position' >
+                <div className='logo_title' >BOULDER</div>
+                <div className='logo_title'  >CLIMB</div>
             </div>
         </div>
         <div className='loginContainer' >
