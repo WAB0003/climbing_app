@@ -77,9 +77,9 @@ def make_likes():
     like2 = Like(user_id=1, route_id=4)
     like3 = Like(user_id=1, route_id=1)
     like4 = Like(user_id=1, route_id=6)
-    like5 = Like(user_id=2, route_id=6)
-    like6 = Like(user_id=2, route_id=2)
-    like7 = Like(user_id=2, route_id=3)
+    like5 = Like(user_id=4, route_id=6)
+    like6 = Like(user_id=4, route_id=2)
+    like7 = Like(user_id=4, route_id=3)
     
     db.session.add_all([like1, like2, like3, like4, like5, like6, like7])
     db.session.commit()
@@ -95,7 +95,7 @@ def delete_climbs():
         
         
     
-    import ipdb; ipdb.set_trace()
+    # import ipdb; ipdb.set_trace()
 
 
 if __name__ == '__main__':
