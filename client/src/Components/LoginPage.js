@@ -1,8 +1,7 @@
 import React, {useState} from 'react'
 // import {useHistory} from 'react-router-dom'
 import 'semantic-ui-css/semantic.min.css'
-import { Container, Button, Form } from 'semantic-ui-react'
-import { Navigate } from 'react-router-dom'
+import { Button, Form } from 'semantic-ui-react'
 import { currentUser } from '../Recoil/userRecoil'
 import { useSetRecoilState } from 'recoil'
 import main_logo from '../images/main_logo.jpg'
@@ -55,7 +54,7 @@ const LoginPage = () => {
         })
         .then(r => {
             if (r.ok){r.json().then((user)=>{updateUser(user)})}
-            else {signUp ? setErrors("Username MUST be unique") : setErrors("Login Doesn't Exist")}
+            else {signUp ? setErrors("Username MUST be unique. Username provided already exists") : setErrors("Login does not exist. Please submit a valid Login")}
         })
     }
     
