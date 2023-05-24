@@ -11,10 +11,9 @@ const ClimbedRoutesPage = () => {
   const [allClimbs, setAllClimbs] = useRecoilState(currentClimbs)
   const user = useRecoilValue(currentUser)
   
-  const userClimbs = allClimbs.filter((climb)=>(climb.user.id=== user.id))
+  const userClimbs = allClimbs?.filter((climb)=>(climb.user.id=== user.id))
   const displayClimbs = userClimbs.map((climb) => <ClimbedRouteRow key={climb.id} climb= {climb} />)
 
-  
   
   if (userClimbs.length ===0){
     return (

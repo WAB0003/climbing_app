@@ -10,7 +10,7 @@ const CurrentRouteRow = ({route}) => {
     const [allLikes, setAllLikes] = useRecoilState(currentLikes)
     const [allClimbs, setAllClimbs] = useRecoilState(currentClimbs)
 
-    const allRouteLikes = allLikes.filter((like)=>like.route.id === route.id)
+    const allRouteLikes = allLikes?.filter((like)=>like.route.id === route.id)
 
 
     //get individual Like for the specific route and user:
