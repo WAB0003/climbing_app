@@ -102,8 +102,8 @@ const CurrentRouteRow = ({route}) => {
             <Table.Cell>{allRouteLikes.length}</Table.Cell>
             <Table.Cell>
                 <div className='table_icons' >
-                    <Icon className='table_icon'  color={(specificLike) ? "green" : "grey"} name='heart' onClick={handleLikeButton}/>
-                    <Icon className='table_icon'  color={(specificClimb) ? "green" : "grey"} name='check' onClick={handleCheckButton}/>
+                    <Icon className='table_icon'  color={(specificLike) ? "green" : "grey"} name={(specificLike) ? "heart" : "heart outline"} onClick={handleLikeButton}/>
+                    <Icon className='table_icon'  color={(specificClimb) ? "green" : "grey"} name={(specificClimb) ? "check circle" : "check circle outline"} onClick={handleCheckButton}/>
                 </div>
             </Table.Cell>
         </Table.Row>

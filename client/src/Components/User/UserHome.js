@@ -1,7 +1,7 @@
 const UserHome = () => {
     
 
-    return <h1>User Home Page</h1>
+    return <h1 className="User_Page_Titles" >User Home Page</h1>
 
 }
 
