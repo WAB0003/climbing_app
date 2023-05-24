@@ -145,3 +145,9 @@
   justify-content: left;
   ;
 }
+
+.employee_home_options{
+  display: flex;
+  justify-content: space-between;
+
+}
