@@ -98,6 +98,9 @@
 .User_Page_Titles {
   padding-top: 20px;
   text-align: center;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  color: #555555;
+  transform: scale(2,1.5)
 }
 
 .all_gyms{
@@ -150,4 +153,17 @@
   display: flex;
   justify-content: space-between;
 
+}
+
+.route_table {
+  padding-bottom: 50px;
+}
+
+
+.tableHeaders {
+  font-weight: bold;
+  display: flex;
+}
+.tableHeaders:hover {
+  font-weight: bolder;
 }

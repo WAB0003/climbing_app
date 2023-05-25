@@ -14,7 +14,12 @@ const EmployeeHome = () => {
     const [allRoutes, setAllRoutes] = useRecoilState(currentRoutes)
     const allGyms = useRecoilValue( currentGyms )
     const [filterGym, setFilterGym] = useState("All")
+    const [sortby,setSortBy] = useState({
+                                            order: "regular",
+                                            attribute :null
+                                        })
 
+    //! handle Filter of Gyms
     let filteredRoutes = allRoutes
     if (filterGym === "All"){
         filteredRoutes = allRoutes
@@ -23,6 +28,23 @@ const EmployeeHome = () => {
         // console.log(filteredRoutes)
     }
     
+
+    //! handle the Sorting of items 
+    let displayRoutes
+    if (sortby.attribute === null){
+        displayRoutes = filteredRoutes
+    } else if(sortby.order === "regular") {
+        const sortedRoutes = [...filteredRoutes].sort((a, b) => {
+            return (b[sortby.attribute] - a[sortby.attribute])
+        } );
+        displayRoutes = sortedRoutes
+    } else {
+        const sortedRoutes = [...filteredRoutes].sort((a, b) => {
+            return (a[sortby.attribute] - b[sortby.attribute])
+        } );
+        displayRoutes = sortedRoutes
+    }
+
     //! Handle Delete of route
     const handleDeleteClick=(route)=>{
         fetch(`/routes/${route.id}`,{
@@ -41,12 +63,21 @@ const EmployeeHome = () => {
         setFilterGym(e.target.value)
     }
 
-    
-    
+    const handleNumberSorts = (e) => {
+        if (sortby.attribute === e.target.value && sortby.order ==="regular"){
+            setSortBy({
+                order: "reverse",
+                attribute: e.target.value})
+        }else{
+            setSortBy({
+                order: "regular",
+                attribute: e.target.value})
+        }
+    }
 
 
     //Variable to display all routes as a row in the Table:
-    const displayRoutes = filteredRoutes.map((route) => {
+    const eachRoute = displayRoutes.map((route) => {
         return (
             <Table.Row key={route.id}>
                 <Table.Cell>{route.id}</Table.Cell>
@@ -70,7 +101,7 @@ const EmployeeHome = () => {
     return(
         <div>
             <h1 className='User_Page_Titles' >Employee Home</h1>
-            <Container >
+            <Container className='route_table'  >
                 <div className='employee_home_options' >
                     <Form>
                         <Form.Field label="Filter By Gym" control='select' onChange={handleFilter}>
@@ -79,14 +110,22 @@ const EmployeeHome = () => {
                         </Form.Field>
                     </Form>
                     {<AddRouteModal />}
-                </div>
-                <Table celled>
+                </div >
+                <Table celled >
                     <Table.Header>
                         <Table.Row>
-                            <Table.HeaderCell>id</Table.HeaderCell>
-                            <Table.HeaderCell>Active</Table.HeaderCell>
-                            <Table.HeaderCell>Name</Table.HeaderCell>
-                            <Table.HeaderCell>Rating</Table.HeaderCell>
+                            <Table.HeaderCell>
+                                <option className='tableHeaders' value="id" onClick={handleNumberSorts}>ID</option>
+                            </Table.HeaderCell>
+                            <Table.HeaderCell>
+                                <option className='tableHeaders'  value="active" onClick={handleNumberSorts}>Active</option>
+                            </Table.HeaderCell>
+                            <Table.HeaderCell>
+                                <option className='tableHeaders'  value="name" >Name</option>
+                            </Table.HeaderCell>
+                            <Table.HeaderCell>
+                                <option className='tableHeaders'  value="rating" onClick={handleNumberSorts}>Rating</option>
+                            </Table.HeaderCell>
                             <Table.HeaderCell>Setter</Table.HeaderCell>
                             <Table.HeaderCell>Gym</Table.HeaderCell>
                             <Table.HeaderCell>Likes</Table.HeaderCell>
@@ -94,7 +133,7 @@ const EmployeeHome = () => {
                         </Table.Row>
                     </Table.Header>
                     <Table.Body>
-                        {displayRoutes}
+                        {eachRoute}
                     </Table.Body>
                 </Table>
             </Container>
