@@ -1,6 +1,6 @@
 import React , {useState, useEffect}  from 'react';
 import 'semantic-ui-css/semantic.min.css'
-import { Table, Container, Icon, Form } from 'semantic-ui-react'
+import { Table, Container, Icon, Form, Button } from 'semantic-ui-react'
 import "../../App.css"
 import AddRouteModal from './AddRouteModal';
 import { useRecoilState, useRecoilValue } from 'recoil';
@@ -114,6 +114,15 @@ const EmployeeHome = () => {
         }
     }
 
+    const handleTableReset = (e) => {
+        setFilterGym("All")
+        setSortBy({
+            order: "regular",
+            attribute :null
+        })
+
+    }
+
 
 
     //Variable to display all routes as a row in the Table:
@@ -143,12 +152,19 @@ const EmployeeHome = () => {
             <h1 className='User_Page_Titles' >Employee Home</h1>
             <Container className='route_table'  >
                 <div className='employee_home_options' >
-                    <Form>
-                        <Form.Field label="Filter By Gym" control='select' onChange={handleFilter}>
-                            <option>All</option>
-                            {allGyms.map((each_gym)=><option key={each_gym.id} >{each_gym.name}</option>)}
-                        </Form.Field>
-                    </Form>
+                    <div>
+                        <div style={{fontWeight:"bold"}} >Filter Options:</div>
+                        <div className='table_filter'>
+                            <Form className='filter_options' >
+                                <Form.Field control='select' onChange={handleFilter}>
+                                    <option>All</option>
+                                    {allGyms.map((each_gym)=><option key={each_gym.id} >{each_gym.name}</option>)}
+                                </Form.Field>
+                            </Form>
+                            <Button className='filter_options' onClick={handleTableReset} >Reset Table</Button>
+                        </div>
+                    </div>
+
                     {<AddRouteModal />}
                 </div >
                 <Table celled >

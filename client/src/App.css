@@ -167,3 +167,12 @@
   font-weight: bolder;
   cursor:context-menu;
 }
+
+.table_filter {
+  display: flex;
+}
+
+.filter_options{
+  flex:1;
+  padding-right: 8px;
+}

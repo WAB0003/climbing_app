@@ -120,8 +120,8 @@ class Route(db.Model, SerializerMixin):
 
     gym = db.relationship("Gym", back_populates="routes")
     setter = db.relationship("User", back_populates="routes")
-    likes = db.relationship("Like", back_populates="route")
-    climbs = db.relationship("Climb", back_populates="route")
+    likes = db.relationship("Like", back_populates="route", cascade="all, delete-orphan")
+    climbs = db.relationship("Climb", back_populates="route", cascade="all, delete-orphan")
     
     def __repr__(self):
             return f'<Route {self.name}>'
