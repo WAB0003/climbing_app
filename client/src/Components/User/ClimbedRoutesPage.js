@@ -19,14 +19,14 @@ const ClimbedRoutesPage = () => {
     return (
         <>
             <h2 className="User_Page_Titles" >You have Climbed No Routes!</h2>
-            <h3 className="User_Page_Titles">Visit the {<Link to="/routes" >Current Routes</Link>} page and click the " {<Icon name='check'/>}" for each Route you have climbed!</h3>
+            <h3 style={{textAlign:"center"}} >Visit the {<Link to="/routes" >Current Routes</Link>} page and click the " {<Icon name='check'/>}" for each Route you have climbed!</h3>
         </>
     )
   }else{
 
     return(
         <div>
-            <h1 className="User_Page_Titles"  >Climbed Routes</h1>
+            <h1 className="User_Page_Titles" >Climbed Routes</h1>
             <Container >
                 <Table celled>
                     <Table.Header>

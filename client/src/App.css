@@ -176,3 +176,8 @@
   flex:1;
   padding-right: 8px;
 }
+
+.centerItems {
+  text-align: center;
+  padding: 3px;
+}

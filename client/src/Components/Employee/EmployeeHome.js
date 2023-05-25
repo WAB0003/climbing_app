@@ -7,6 +7,7 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 import { currentRoutes } from '../../Recoil/routesRecoil';
 import UpdateRouteModal from './UpdateRouteModal';
 import { currentGyms } from '../../Recoil/gymsRecoil';
+import tableSorter from '../tableSorter';
 
 
 
@@ -25,64 +26,11 @@ const EmployeeHome = () => {
         filteredRoutes = allRoutes
     } else {
         filteredRoutes = allRoutes.filter((route)=>route.gym.name === filterGym)
-        // console.log(filteredRoutes)
     }
     
-
-    //! ITEM SORTING CODE---------------------------------------------------------------------------------
-    let displayRoutes
-    if (sortby.attribute === null){
-        displayRoutes = filteredRoutes
-    }else{
-        if(sortby.attribute === "name"){
-            const sortedRoutes = [...filteredRoutes].sort((a, b) => a[sortby.attribute].localeCompare(b[sortby.attribute]))
-            if(sortby.order === "regular") {
-                displayRoutes = sortedRoutes
-            }else{
-                displayRoutes = sortedRoutes.reverse()
-            }
-        }else if (sortby.attribute === "setter"){
-            const sortedRoutes = [...filteredRoutes].sort((a, b) => a[sortby.attribute].first_name.localeCompare(b[sortby.attribute].first_name))
-            if(sortby.order === "regular") {
-                displayRoutes = sortedRoutes
-            }else{
-                displayRoutes = sortedRoutes.reverse()
-            }
-            
-        }else if (sortby.attribute === "gym"){
-            const sortedRoutes = [...filteredRoutes].sort((a, b) => a[sortby.attribute].name.localeCompare(b[sortby.attribute].name))
-            if(sortby.order === "regular") {
-                displayRoutes = sortedRoutes
-            }else{
-                displayRoutes = sortedRoutes.reverse()
-            }
-            
-        }else if (sortby.attribute === "likes"){
-            const sortedRoutes = [...filteredRoutes].sort((a, b) => {
-                return (b[sortby.attribute].length - a[sortby.attribute].length)
-            } );
-
-            if(sortby.order === "regular") {
-                displayRoutes = sortedRoutes
-            } else {
-                displayRoutes = sortedRoutes.reverse()
-            }
-        }else{
-            const sortedRoutes = [...filteredRoutes].sort((a, b) => {
-                return (b[sortby.attribute] - a[sortby.attribute])
-            } );
-
-            if(sortby.order === "regular") {
-                displayRoutes = sortedRoutes
-            } else {
-                displayRoutes = sortedRoutes.reverse()
-            }
-        }
-    }
-    //! ITEM SORTING CODE^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-        
-
-
+    //!Created table sorter function that handles specific attributes from tables and sorts accordingly
+    const displayRoutes = tableSorter(filteredRoutes, sortby)
+    
 
     //!Handle Functions
     const handleDeleteClick=(route)=>{
@@ -120,7 +68,6 @@ const EmployeeHome = () => {
             order: "regular",
             attribute :null
         })
-
     }
 
 
