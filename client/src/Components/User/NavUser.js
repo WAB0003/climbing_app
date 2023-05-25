@@ -47,6 +47,9 @@ export default function NavUser() {
                         <div className="nav_button" onClick={handleRedirect} to="/routes">Current Routes</div>
                     </li>
                     <li>
+                        <Link className="nav_button" to="/">Home</Link>
+                    </li>
+                    <li>
                         <h3>{user.current_gym ? `Selected Gym: ${user.current_gym.name}` : "No Gym Selected"}</h3>
                         <Link className="nav_button_secondary"  to="/gyms">Select Preferred Gym</Link>
                     </li>
