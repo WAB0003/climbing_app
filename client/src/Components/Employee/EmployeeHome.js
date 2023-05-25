@@ -29,23 +29,62 @@ const EmployeeHome = () => {
     }
     
 
-    //! handle the Sorting of items 
+    //! ITEM SORTING CODE---------------------------------------------------------------------------------
     let displayRoutes
     if (sortby.attribute === null){
         displayRoutes = filteredRoutes
-    } else if(sortby.order === "regular") {
-        const sortedRoutes = [...filteredRoutes].sort((a, b) => {
-            return (b[sortby.attribute] - a[sortby.attribute])
-        } );
-        displayRoutes = sortedRoutes
-    } else {
-        const sortedRoutes = [...filteredRoutes].sort((a, b) => {
-            return (a[sortby.attribute] - b[sortby.attribute])
-        } );
-        displayRoutes = sortedRoutes
-    }
+    }else{
+        if(sortby.attribute === "name"){
+            const sortedRoutes = [...filteredRoutes].sort((a, b) => a[sortby.attribute].localeCompare(b[sortby.attribute]))
+            if(sortby.order === "regular") {
+                displayRoutes = sortedRoutes
+            }else{
+                displayRoutes = sortedRoutes.reverse()
+            }
+        }else if (sortby.attribute === "setter"){
+            const sortedRoutes = [...filteredRoutes].sort((a, b) => a[sortby.attribute].first_name.localeCompare(b[sortby.attribute].first_name))
+            if(sortby.order === "regular") {
+                displayRoutes = sortedRoutes
+            }else{
+                displayRoutes = sortedRoutes.reverse()
+            }
+            
+        }else if (sortby.attribute === "gym"){
+            const sortedRoutes = [...filteredRoutes].sort((a, b) => a[sortby.attribute].name.localeCompare(b[sortby.attribute].name))
+            if(sortby.order === "regular") {
+                displayRoutes = sortedRoutes
+            }else{
+                displayRoutes = sortedRoutes.reverse()
+            }
+            
+        }else if (sortby.attribute === "likes"){
+            const sortedRoutes = [...filteredRoutes].sort((a, b) => {
+                return (b[sortby.attribute].length - a[sortby.attribute].length)
+            } );
 
-    //! Handle Delete of route
+            if(sortby.order === "regular") {
+                displayRoutes = sortedRoutes
+            } else {
+                displayRoutes = sortedRoutes.reverse()
+            }
+        }else{
+            const sortedRoutes = [...filteredRoutes].sort((a, b) => {
+                return (b[sortby.attribute] - a[sortby.attribute])
+            } );
+
+            if(sortby.order === "regular") {
+                displayRoutes = sortedRoutes
+            } else {
+                displayRoutes = sortedRoutes.reverse()
+            }
+        }
+    }
+    //! ITEM SORTING CODE^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        
+
+
+
+    //!Handle Functions
     const handleDeleteClick=(route)=>{
         fetch(`/routes/${route.id}`,{
         method: "DELETE",
@@ -63,7 +102,7 @@ const EmployeeHome = () => {
         setFilterGym(e.target.value)
     }
 
-    const handleNumberSorts = (e) => {
+    const handleSort = (e) => {
         if (sortby.attribute === e.target.value && sortby.order ==="regular"){
             setSortBy({
                 order: "reverse",
@@ -74,6 +113,7 @@ const EmployeeHome = () => {
                 attribute: e.target.value})
         }
     }
+
 
 
     //Variable to display all routes as a row in the Table:
@@ -115,20 +155,26 @@ const EmployeeHome = () => {
                     <Table.Header>
                         <Table.Row>
                             <Table.HeaderCell>
-                                <option className='tableHeaders' value="id" onClick={handleNumberSorts}>ID</option>
+                                <option className='tableHeaders' value="id" onClick={handleSort}>ID</option>
                             </Table.HeaderCell>
                             <Table.HeaderCell>
-                                <option className='tableHeaders'  value="active" onClick={handleNumberSorts}>Active</option>
+                                <option className='tableHeaders'  value="active" onClick={handleSort}>Active</option>
                             </Table.HeaderCell>
                             <Table.HeaderCell>
-                                <option className='tableHeaders'  value="name" >Name</option>
+                                <option className='tableHeaders'  value="name" onClick={handleSort} >Name</option>
                             </Table.HeaderCell>
                             <Table.HeaderCell>
-                                <option className='tableHeaders'  value="rating" onClick={handleNumberSorts}>Rating</option>
+                                <option className='tableHeaders'  value="rating" onClick={handleSort}>Rating</option>
                             </Table.HeaderCell>
-                            <Table.HeaderCell>Setter</Table.HeaderCell>
-                            <Table.HeaderCell>Gym</Table.HeaderCell>
-                            <Table.HeaderCell>Likes</Table.HeaderCell>
+                            <Table.HeaderCell>
+                                <option className='tableHeaders'  value="setter" onClick={handleSort}>Setter</option>
+                            </Table.HeaderCell>
+                            <Table.HeaderCell>
+                                <option className='tableHeaders'  value="gym" onClick={handleSort}>Gym</option>
+                            </Table.HeaderCell>
+                            <Table.HeaderCell>
+                                <option className='tableHeaders'  value="likes" onClick={handleSort}>Likes</option>
+                            </Table.HeaderCell>
                             <Table.HeaderCell>Options</Table.HeaderCell>
                         </Table.Row>
                     </Table.Header>

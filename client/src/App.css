@@ -159,11 +159,11 @@
   padding-bottom: 50px;
 }
 
-
 .tableHeaders {
   font-weight: bold;
   display: flex;
 }
 .tableHeaders:hover {
   font-weight: bolder;
+  cursor:context-menu;
 }
