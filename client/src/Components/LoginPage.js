@@ -52,7 +52,7 @@ const LoginPage = () => {
         })
         .then(r => {
             if (r.ok){r.json().then((user)=>{updateUser(user)})}
-            else {signUp ? setErrors("Username MUST be unique. Username provided already exists") : setErrors("Login does not exist. Please submit a valid Login")}
+            else {signUp ? setErrors("Invalid Username") : setErrors("Login does not exist. Please submit a valid Login")}
         })
     }
     
