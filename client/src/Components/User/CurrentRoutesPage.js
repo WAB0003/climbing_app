@@ -21,7 +21,6 @@ const CurrentRoutesPage = () => {
     //! When Table header is clicked, the handle sort function creates an object that gets passed
     //! to the tableSorter function along with the the array of objects to be sorted.
     const handleSort = (e) => {
-        console.log(e.target.value)
         if (sortby.attribute === e.target.value && sortby.order ==="regular"){
             setSortBy({
                 order: "reverse",

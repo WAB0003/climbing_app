@@ -29,7 +29,6 @@ const CurrentRouteRow = ({route}) => {
     })
     // above filter gives a list of "1" climb. Needs to get the actual object of like if it exists. 
     const specificClimb = climbArray[0]
-    // console.log(specificClimb)
 
     //!Like (HEART) BUTTON
     //Variable to display all ACTIVE routes for the SELECTED Gym:
