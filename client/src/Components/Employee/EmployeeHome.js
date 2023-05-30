@@ -1,5 +1,4 @@
-import React , {useState, useEffect}  from 'react';
-import 'semantic-ui-css/semantic.min.css'
+import React , { useState }  from 'react';
 import { Table, Container, Icon, Form, Button } from 'semantic-ui-react'
 import "../../App.css"
 import AddRouteModal from './AddRouteModal';

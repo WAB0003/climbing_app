@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react"
 import { useRecoilState } from "recoil";
-import { Icon, Button } from 'semantic-ui-react'
+import { Button } from 'semantic-ui-react'
 import { currentClimbs } from "../Recoil/climbsRecoil";
 
 const UploadWidget = ({climb}) => {

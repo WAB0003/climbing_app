@@ -1,7 +1,5 @@
 import React,  {useState } from 'react'
-import 'semantic-ui-css/semantic.min.css'
-import { Button, Header, Modal, Icon } from 'semantic-ui-react'
-import AddRouteForm from './AddRouteForm'
+import { Button, Modal, Icon } from 'semantic-ui-react'
 import UpdateRouteForm from './UpdateRouteForm'
 
 const UpdateRouteModal = ({route}) => {

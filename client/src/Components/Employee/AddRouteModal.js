@@ -1,5 +1,4 @@
 import React,  {useState } from 'react'
-import 'semantic-ui-css/semantic.min.css'
 import { Button, Header, Modal } from 'semantic-ui-react'
 import AddRouteForm from './AddRouteForm'
 
