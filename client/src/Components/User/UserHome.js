@@ -17,7 +17,6 @@ const UserHome = () => {
     const userClimbedRouteIds = userClimbedRoutes.map((climb)=>climb.route.id)
     const highestClimbedRating = Math.max.apply(null,userClimbedRoutes.map((climb)=>climb.route.rating))
     
-    debugger
     //!Gym Statistics: Show the user statistics for each Gym
     const showGymsStats = allGyms.map((gym)=>{
         const ActiveGymRoutes = allRoutes.filter((route)=>(route.gym.id === gym.id) && (route.active))
@@ -60,11 +59,10 @@ const UserHome = () => {
     }
     
 
-
     //!Main Display of Home Page
     return (
         <div >
-            <h1 className="User_Page_Titles" >User Home Page</h1>
+            <h1 className="User_Page_Titles" >Home</h1>
             <div className="statistics" >
                 <h2>Gym Stats:</h2>
                 {showGymsStats}
