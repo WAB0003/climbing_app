@@ -27,5 +27,19 @@ As a user of Boulder Climb, I can expect to do the following:
 - “like” or “climb” a route under the current routes page
 - Upon clicking the “climb” button on the Current Routes page, a table of Climbed Routes becomes populated with information of each route that the user can always access. Additionally, for each climbing route, there’s an option to “Prove It” in which the user can upload a video of themselves climbing the route to prove that they have indeed climbed the route!
 
+## Starting Application
+In order to use this application, the following commands must be completed in the user terminal upon initial startup. Once in the parent directory, *cd* into the `server` directory and type the following commands:
 
+```
+python seed.py
+python app.py
+```
 
+This will establish the backend server so the front end can properly pull the correct information.
+
+Next, open a new terminal and *cd* into the `client` directory. Type the following commands:
+```
+npm start
+```
+
+Immediately following the command listed previously, the web application should start up and you should be able to use *Boulder Climb*!
