@@ -97,6 +97,7 @@
 
 .User_Page_Titles {
   padding-top: 20px;
+  margin-bottom: 30px;
   text-align: center;
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   color: #555555;
@@ -180,4 +181,53 @@
 .centerItems {
   text-align: center;
   padding: 3px;
+}
+
+.statistics {
+  margin:auto;
+  margin-top: 10px;
+  padding-bottom: 20px ;
+  border-radius: 10px;
+  border: rgb(9, 9, 9);
+  border-width: 1px;
+  border-style:solid;
+  width: 500px;
+}
+.statistics h2 {
+  margin-left: 10px;
+  margin-bottom: 0px;
+  padding-top: 10px;
+}
+
+.statistics h3 {
+  margin-left: 10px;
+  margin-bottom: 10px;
+  padding-top: 10px;
+}
+
+.statistics div {
+  margin-left: 20px;
+}
+
+.stat_col {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.stat_names span {
+  width: 400px;
+  display: flex;
+}
+
+.stat_values span {
+  display: block;
+  text-align:right;
+}
+
+.stat_names span:after {
+  content: "";
+  display: inline-block;
+  height: 1em;
+  flex-grow: 1;
+  background: radial-gradient(black 25%, transparent 25%) scroll repeat-x bottom left/5px 5px;
 }

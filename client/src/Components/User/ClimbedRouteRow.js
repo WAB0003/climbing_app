@@ -1,16 +1,8 @@
-import { useState } from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
 import { Table } from "semantic-ui-react";
-import { currentUser } from "../../Recoil/userRecoil";
-import { currentLikes} from "../../Recoil/likesRecoil";
-import { currentClimbs} from "../../Recoil/climbsRecoil";
 import UploadWidget from "../UploadWidget";
 import UserVideoModal from "./UserVideoModal";
 
 const ClimbedRouteRow = ({climb}) => {
-    const user = useRecoilValue (currentUser)
-    const [allClimbs, setAllClimbs] = useRecoilState(currentClimbs)
-
 
     return(
         <Table.Row key={climb.id}>

@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { Table, Icon } from "semantic-ui-react";
 import { currentUser } from "../../Recoil/userRecoil";

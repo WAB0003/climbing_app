@@ -1,6 +1,4 @@
 import React, {useState} from 'react'
-// import {useHistory} from 'react-router-dom'
-import 'semantic-ui-css/semantic.min.css'
 import { Button, Form } from 'semantic-ui-react'
 import { currentUser } from '../Recoil/userRecoil'
 import { useSetRecoilState } from 'recoil'
