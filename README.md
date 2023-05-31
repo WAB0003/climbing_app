@@ -15,7 +15,7 @@ As an Employee of Boulder Climb, I can expect to do the following:
 In order to view the Employee user page, type in the following credentials under the Login Page of the application:
 
 Username: employeeJim  
-password: chicken  
+password: password  
 
 ### _General User_
 As a user of Boulder Climb, I can expect to do the following:
