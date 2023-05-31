@@ -74,9 +74,11 @@
 }
 
 .user_video {
+  margin: auto;
   justify-content: center;
-  /* flex: 1;
-  display: flex; */
+  width: 500px;
+  flex: 1;
+  display: flex;
 }
 
 .loginContainer{

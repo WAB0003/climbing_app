@@ -14,13 +14,13 @@ const EmployeeVideoModal = ({climbs, route}) => {
         }else {
             const updatedClimb = (climbs.filter(climb=>climb.user.username===e.target.value))[0]
             setClimb(updatedClimb)
+            
         }
 
     }
 
-    console.log(Object.keys(climb).length !== 0)
     const handleVideo = () => {
-            return <VideoPlayer className="employeeVideo" climb={climb} />
+            return <VideoPlayer key={climb.id} className="employeeVideo" climb={climb} />
         
     }
 
