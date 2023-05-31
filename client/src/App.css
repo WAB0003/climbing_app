@@ -75,8 +75,8 @@
 
 .user_video {
   justify-content: center;
-  flex: 1;
-  display: flex;
+  /* flex: 1;
+  display: flex; */
 }
 
 .loginContainer{
@@ -231,3 +231,26 @@
   flex-grow: 1;
   background: radial-gradient(black 25%, transparent 25%) scroll repeat-x bottom left/5px 5px;
 }
+
+.userVideoModalContent {
+  overflow: auto;
+}
+
+.employeeVideoForm {
+  width: 25%;
+  float: left;
+  padding-right: 20px;
+}
+  
+.employeeVideo {
+  width: 50%;
+  justify-content: flex-end;
+  float: right;
+}
+
+.center_in_cell{
+  align-items: center;
+  display: flex;
+
+}
+

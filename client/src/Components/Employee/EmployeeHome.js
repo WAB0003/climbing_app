@@ -1,18 +1,21 @@
+import "../../App.css"
 import React , { useState }  from 'react';
 import { Table, Container, Icon, Form, Button } from 'semantic-ui-react'
-import "../../App.css"
-import AddRouteModal from './AddRouteModal';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { currentRoutes } from '../../Recoil/routesRecoil';
 import UpdateRouteModal from './UpdateRouteModal';
-import { currentGyms } from '../../Recoil/gymsRecoil';
 import tableSorter from '../tableSorter';
+import AddRouteModal from './AddRouteModal';
+import { currentRoutes } from '../../Recoil/routesRecoil';
+import { currentGyms } from '../../Recoil/gymsRecoil';
+import { currentClimbs } from '../../Recoil/climbsRecoil';
+import EmployeeVideoModal from "./employeeVideoModal";
 
 
 
 const EmployeeHome = () => {
     const [allRoutes, setAllRoutes] = useRecoilState(currentRoutes)
     const allGyms = useRecoilValue( currentGyms )
+    const allClimbs = useRecoilValue( currentClimbs)
     const [filterGym, setFilterGym] = useState("All")
     const [sortby,setSortBy] = useState({
                                             order: "regular",
@@ -70,9 +73,16 @@ const EmployeeHome = () => {
     }
 
 
-
     //Variable to display all routes as a row in the Table:
     const eachRoute = displayRoutes.map((route) => {
+        const climberVideosOfRoutes = allClimbs.filter(climb=>{
+            if (climb.user_video && climb.route.id === route.id){
+                return climb
+            }
+        })
+
+        
+        
         return (
             <Table.Row key={route.id}>
                 <Table.Cell>{route.id}</Table.Cell>
@@ -82,6 +92,9 @@ const EmployeeHome = () => {
                 <Table.Cell>{route.setter.first_name} {route.setter.last_name}</Table.Cell>
                 <Table.Cell>{route.gym.name}</Table.Cell>
                 <Table.Cell>{route.likes.length}</Table.Cell>
+                <Table.Cell className="center_in_cell" >
+                        {climberVideosOfRoutes.length>0?<EmployeeVideoModal climbs={climberVideosOfRoutes} route={route}/>:""}
+                </Table.Cell>
                 <Table.Cell>
                     <div className='table_icons' >
                         <UpdateRouteModal route={route}/>
@@ -137,6 +150,7 @@ const EmployeeHome = () => {
                             <Table.HeaderCell>
                                 <option className='tableHeaders'  value="likes" onClick={handleSort}>Likes</option>
                             </Table.HeaderCell>
+                            <Table.HeaderCell>User Videos</Table.HeaderCell>
                             <Table.HeaderCell>Options</Table.HeaderCell>
                         </Table.Row>
                     </Table.Header>

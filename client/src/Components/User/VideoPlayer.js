@@ -5,6 +5,7 @@ import { useEffect, useRef } from "react";
 function VideoPlayer({climb}) {
     const cloudinaryRef = useRef();
     const videoRef = useRef();
+    // console.log(climb)
 
     useEffect(()=>{
         if (cloudinaryRef.current ) return;
@@ -12,10 +13,8 @@ function VideoPlayer({climb}) {
 
         cloudinaryRef.current.videoPlayer(videoRef.current, {
             cloud_name: 'dorqiv7fn', 
-    
         })
    
-
     },[])
 
     return(
