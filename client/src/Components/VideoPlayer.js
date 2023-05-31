@@ -20,7 +20,7 @@ function VideoPlayer({climb}) {
 
     return(
         <div className="user_video" >
-            <video controls ref={videoRef} width={500}  data-cld-public-id={climb.user_video} />
+            <video controls ref={videoRef} height={500}  data-cld-public-id={climb.user_video} />
         </div>
     )
 }
