@@ -5,11 +5,6 @@ import { useEffect, useRef } from "react";
 function VideoPlayer({climb}) {
     const cloudinaryRef = useRef();
     const videoRef = useRef();
-    console.log(videoRef)
-
-    
-    
-    
 
     useEffect(()=>{
        
