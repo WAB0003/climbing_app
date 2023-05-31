@@ -1,5 +1,5 @@
 import { Table } from "semantic-ui-react";
-import UploadWidget from "../UploadWidget";
+import UploadWidget from "./UploadWidget";
 import UserVideoModal from "./UserVideoModal";
 
 const ClimbedRouteRow = ({climb}) => {

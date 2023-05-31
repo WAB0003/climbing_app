@@ -1,6 +1,6 @@
 import { Icon, Modal, Button } from "semantic-ui-react";
 import { useState } from "react";
-import VideoPlayer from "../VideoPlayer";
+import VideoPlayer from "./VideoPlayer";
 import "../../App.css"
 
 const UserVideoModal = ({climb}) => {
