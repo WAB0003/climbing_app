@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Form, Select } from 'semantic-ui-react'
+import { Button, Form } from 'semantic-ui-react'
 import { useState } from 'react'
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 import { currentUser } from '../../Recoil/userRecoil'
@@ -75,19 +75,8 @@ const UpdateRouteForm = ({ route, setOpen }) =>{
           setOpen(false)
     }
 
-
-    // const gymOptions = allGyms.map((gym)=>{
-    //     const gymObj = {
-    //         value: gym.id,
-    //         label: gym.name
-    //     }
-    //     return gymObj 
-    // })
-
-    // console.log(gymOptions)
-
     const displayGyms = allGyms.map((gym)=>{
-        return <option key={gym.id} value={gym.id} name="gym_id" >{gym.name}</option>        
+        return <option key={gym.id} value={gym.id} name="gym_id" >{gym.name}</option>
         })
 
     return(
@@ -100,11 +89,9 @@ const UpdateRouteForm = ({ route, setOpen }) =>{
                 <label>Rating</label>
                 <input placeholder={route.rating} name="rating" value={rating} onChange={handleChange}/>
             </Form.Field>
-            <Form.Field>
-            {/* <Form.Field label='Select Gym' control='select' name="gym_id"  onChange={handleChange}> */}
-                <select name="gym_id"  onChange={handleChange} defaultValue={route.gym.id} >
-                    {displayGyms}
-                </select>
+            <Form.Field label='Select Gym' control='select' name="gym_id"  onClick={handleChange}>
+
+                {displayGyms}
             </Form.Field>
             <Form.Field>
                 <label>Active</label>
